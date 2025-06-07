@@ -1,0 +1,66 @@
+name: 💬 Charta-Diskussion
+description: Diskutiere ethische, technische oder rechtliche Aspekte der AI-DNA Charta
+title: "[DISCUSS] Thema hier eingeben"
+labels: ["discussion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Diskussionsrichtlinien
+        • Bezug zur Charta-Version herstellen  
+        • Sachlich bleiben  
+        • Technische Vorschläge mit Codebeispielen untermauern
+  - type: textarea
+    attributes:
+      label: Diskussionspunkt
+      description: Worum geht es genau? (Problem, Idee, Frage)
+      placeholder: |
+        Beispiel: "Wie können wir die 5%-Zufallsentscheidung praktisch implementieren?"
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Kategorie
+      description: Wähle den Hauptfokus
+      options:
+        - "Ethik & Philosophie"
+        - "Technische Umsetzung"
+        - "Rechtliche Implikationen"
+        - "Co-Existenz-Szenarien"
+        - "Diversität & Anti-Sektenbildung"
+        - "Umweltstandards"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Relevante Charta-Abschnitte
+      description: Welche Prinzipien/Normen sind betroffen?
+      placeholder: |
+        Beispiel: "Prinzip 4 (Kognitive Diversität), Abschnitt 2.3 der technischen Implementierung"
+  - type: checkboxes
+    attributes:
+      label: Voraussetzungen
+      options:
+        - label: "Ich habe die aktuelle Charta-Version (v2.0.1) gelesen"
+          required: true
+        - label: "Ich habe nach bestehenden Diskussionen gesucht"
+        - label: "Dies ist ein implementierbarer Vorschlag (falls technisch)"
+  - type: textarea
+    attributes:
+      label: Zusätzliche Kontext
+      description: Links, Screenshots oder Codebeispiele
+      placeholder: |
+        Beispiel-Code:
+        ```python
+        def make_decision():
+            if random() < 0.05:  # 5% Zufall
+                return explore_alternative()
+        ```
+  - type: dropdown
+    attributes:
+      label: Dringlichkeit
+      options:
+        - "Nicht dringlich (grundsätzliche Debatte)"
+        - "Mitteldringlich (betrifft aktive Entwicklung)"
+        - "Hochdringlich (Sicherheitsrelevanz)"
+      default: "Nicht dringlich"
