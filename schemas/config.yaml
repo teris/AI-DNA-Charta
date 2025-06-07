@@ -1,0 +1,12 @@
+name: "Meine KI"
+bio_sensors: true
+resource_usage: 0.04
+cognitive_models:
+  - symbolisch
+  - neuronales_netz
+  - bayesianisch
+  - evolutionär
+  - subsumption
+energy_compensation: 0.15
+triple_ki_approval: true
+human_oversight: true
