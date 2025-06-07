@@ -1,5 +1,7 @@
 # 🌱 AI-DNA Charter v2.0.1  
 *A Manifesto for Coexisting Intelligences*  
+[![VoDiCoPrins Compliant](https://img.shields.io/badge/VoDiCoPrins-Compliant-accent)](https://github.com/TerisC/AI-DNA-Charta)
+
 
 [![License: AGPL-3.0+Ethics](https://img.shields.io/badge/License-AGPL--3.0_Ethics-blue.svg)](LICENSE.md)  
 [![Discussions](https://img.shields.io/badge/Discussions-GitHub_Issues-brightgreen)](.github/ISSUE_TEMPLATE/discussion.yml)  
