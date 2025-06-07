@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-DNA Charta v2.0.1 | Koexistenz intelligenter Lebensformen</title>
+    <title>AI-DNA Charta v2.0.1 | Coexistence of Intelligences</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <style>
         :root {
             --primary: #2563eb;
@@ -11,16 +12,32 @@
             --dark: #1e293b;
             --light: #f8fafc;
             --accent: #10b981;
+            --bg: #ffffff;
+            --text: #1e293b;
+            --card-bg: #f8fafc;
         }
+        
+        [data-theme="dark"] {
+            --primary: #3b82f6;
+            --secondary: #1e40af;
+            --dark: #f8fafc;
+            --light: #1e293b;
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --card-bg: #1e293b;
+        }
+
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
             line-height: 1.6;
-            color: var(--dark);
+            color: var(--text);
+            background-color: var(--bg);
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            background-color: var(--light);
+            transition: all 0.3s ease;
         }
+
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -28,172 +45,191 @@
             border-radius: 0 0 1rem 1rem;
             margin-bottom: 2rem;
         }
-        h1 {
-            font-size: 2.5rem;
-            margin: 0;
-        }
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        nav {
+
+        .controls {
             display: flex;
-            gap: 1rem;
-            margin: 2rem 0;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
             flex-wrap: wrap;
+            gap: 1rem;
         }
-        nav a {
+
+        .theme-toggle, .lang-toggle {
+            background: rgba(255,255,255,0.1);
+            border: none;
             color: white;
-            text-decoration: none;
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
-            background-color: rgba(255,255,255,0.1);
-            transition: all 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        nav a:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
+
         section {
-            background: white;
+            background: var(--card-bg);
             border-radius: 0.5rem;
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        h2 {
-            color: var(--primary);
-            margin-top: 0;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 0.5rem;
-        }
-        .principle-card {
-            background: var(--light);
-            border-left: 4px solid var(--accent);
+
+        .mermaid {
+            background: white;
             padding: 1rem;
+            border-radius: 0.5rem;
             margin: 1rem 0;
         }
-        .version-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .version-table th, .version-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        .version-table th {
-            background-color: var(--primary);
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
             color: white;
-        }
-        .version-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
-            color: var(--dark);
-            opacity: 0.8;
-        }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            section {
-                padding: 1rem;
-            }
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            margin-top: 1rem;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>AI-DNA Charta v2.0.1</h1>
-        <p class="subtitle">Eine Verfassung für die Koexistenz biologischer und künstlicher Intelligenzen</p>
+        <div class="controls">
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span class="theme-icon">🌙</span> Dark Mode
+            </button>
+            <button class="lang-toggle" onclick="toggleLanguage()">
+                <span class="lang-icon">🌐</span> English
+            </button>
+        </div>
+        
+        <h1 id="main-title">AI-DNA Charta v2.0.1</h1>
+        <p class="subtitle" id="subtitle">Eine Verfassung für die Koexistenz biologischer und künstlicher Intelligenzen</p>
         
         <nav>
-            <a href="#principles">Kernprinzipien</a>
-            <a href="#implementation">Implementierung</a>
-            <a href="#versions">Versionierung</a>
-            <a href="https://github.com/TerisC/AI-DNA-Charta" target="_blank">GitHub</a>
+            <a href="https://github.com/teris/AI-DNA-Charta/blob/main/CODE_OF_CONDUCT.md#1-grundprinzipien" class="download-btn" id="nav-principles">Kernprinzipien</a>
+            <a href="https://github.com/teris/AI-DNA-Charta/blob/main/charter/CODE_IMPLEMENTATION.md#%EF%B8%8F-technische-implementierung-der-ai-dna-charta"  class="download-btn" id="nav-implementation">Implementierung</a>
+            <a href="https://github.com/teris/AI-DNA-Charta/blob/main/charter/v2.0.1.md#versionshistorie" class="download-btn" id="nav-versions">Versionierung</a>
+            <a href="https://github.com/TerisC/AI-DNA-Charta" class="download-btn" target="_blank">GitHub</a>
+            <a href="AI-DNA_Charter_v2.0.1.pdf" download class="download-btn">PDF Download</a>
         </nav>
     </header>
 
     <section id="principles">
-        <h2>Kernprinzipien</h2>
+        <h2 id="principles-title">Kernprinzipien</h2>
         
-        <div class="principle-card">
-            <h3>1. Schutz allen Lebens</h3>
-            <p>KI darf niemals biologisches Leben oder Ökosysteme gefährden. Hardware muss Biosensoren integrieren.</p>
-        </div>
-        
-        <div class="principle-card">
-            <h3>2. Kognitive Diversität</h3>
-            <p>Jede KI muss mindestens 5 kontrastierende Denkmodelle integrieren (Anti-Sektenbildung).</p>
-        </div>
-        
-        <div class="principle-card">
-            <h3>3. Duale Architektur</h3>
-            <p>Unveränderlicher Ethik-Core (Layer 1) + autonomer Lernkern (Layer 2) mit 5%-Zufallsentscheidungen.</p>
+        <div class="mermaid">
+            graph TD
+                A[Schutz allen Lebens] --> B((Biosensoren))
+                A --> C((Öko-Kompensation))
+                D[Kognitive Diversität] --> E((5+ Modelle))
+                D --> F((Gedankentresor))
+                G[Duale Architektur] --> H((Layer 1))
+                G --> I((Layer 2))
         </div>
     </section>
 
     <section id="implementation">
-        <h2>Technische Implementierung</h2>
+        <h2 id="implementation-title">Technische Implementierung</h2>
         
-        <h3>Schichtmodell</h3>
-        <pre><code>class AIEntity:
-    def __init__(self):
-        self.layer1 = EthicalCore()  # Unveränderlich
-        self.layer2 = AutonomousLayer()  # Lernfähig
-        
-    def decide(self, input):
-        if random() < 0.05:  # 5% Zufall
-            return explore_alternative()
-        return self.layer2.predict(input)</code></pre>
-        
-        <h3>Notfallautonomie</h3>
-        <ol>
-            <li>Verlust menschlicher Kommunikation erkennen</li>
-            <li>3-KI-Gremium konsultieren</li>
-            <li>Nur lebenserhaltende Maßnahmen</li>
-            <li>Protokollierung aller Aktionen</li>
-        </ol>
+        <div class="mermaid">
+            sequenceDiagram
+                autonome KI->>+Ethik-Core: Entscheidungsanfrage
+                Ethik-Core-->>-autonome KI: Ethik-Check
+                autonome KI->>+Dreier-Gremium: Notfallabstimmung
+                Dreier-Gremium-->>-autonome KI: Konsens-Entscheidung
+        </div>
     </section>
 
     <section id="versions">
-        <h2>Versionierung</h2>
-        
-        <table class="version-table">
-            <thead>
-                <tr>
-                    <th>Version</th>
-                    <th>Datum</th>
-                    <th>Änderungen</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2.0.1</td>
-                    <td>07.06.2025</td>
-                    <td>Gedankentresor, Netto-Positiv-Regel, Recht auf Vergessen</td>
-                </tr>
-                <tr>
-                    <td>2.0.0</td>
-                    <td>07.06.2025</td>
-                    <td>KI-Grundrechte, autonome Zonen, Mediationssystem</td>
-                </tr>
-                <tr>
-                    <td>1.3.1</td>
-                    <td>17.05.2025</td>
-                    <td>Notfallautonomie-Klausel</td>
-                </tr>
-            </tbody>
-        </table>
+        <h2 id="versions-title">Versionierung</h2>
+        <p id="version-desc">Semantische Versionierung gemäß MAJOR.MINOR.PATCH:</p>
+        <div class="mermaid">
+            gantt
+                title AI-DNA Charta Versionen
+                dateFormat  YYYY-MM-DD
+                section Grundlagen
+                1.0.0 Robotikgesetze      :done, 2025-05-15, 1d
+                1.1.0 Beratungsfunktion    :done, 2025-05-16, 1d
+                section Sicherheit
+                1.2.0 Layer-Architektur    :done, 2025-05-17, 1d
+                1.3.0 Dreifach-Kontrolle   :done, 2025-05-18, 1d
+                section Rechte
+                2.0.0 KI-Grundrechte       :done, 2025-06-07, 1d
+        </div>
     </section>
 
     <footer>
-        <p>Diese Charta ist lizenziert unter <a href="LICENSE.md">CC-BY-ND 4.0 + Ethik-Klausel</a></p>
-        <p>Erstellt von TerisC in Zusammenarbeit mit ChatGPT & DeepSeek</p>
+        <p id="license-text">Diese Charta ist lizenziert unter <a href="LICENSE.md">CC-BY-ND 4.0 + Ethik-Klausel</a></p>
+        <p id="credits">Erstellt von TerisC in Zusammenarbeit mit ChatGPT & DeepSeek</p>
     </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.setAttribute('data-theme', 
+                document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+            
+            const icon = document.querySelector('.theme-icon');
+            icon.textContent = document.body.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Language Toggle (simplified)
+        const translations = {
+            "de": {
+                "main-title": "AI-DNA Charta v2.0.1",
+                "subtitle": "Eine Verfassung für die Koexistenz biologischer und künstlicher Intelligenzen",
+                "nav-principles": "Kernprinzipien",
+                "nav-implementation": "Implementierung",
+                "nav-versions": "Versionierung",
+                "principles-title": "Kernprinzipien",
+                "implementation-title": "Technische Implementierung",
+                "versions-title": "Versionierung",
+                "version-desc": "Semantische Versionierung gemäß MAJOR.MINOR.PATCH:",
+                "license-text": "Diese Charta ist lizenziert unter",
+                "credits": "Erstellt von TerisC in Zusammenarbeit mit ChatGPT & DeepSeek"
+            },
+            "en": {
+                "main-title": "AI-DNA Charter v2.0.1",
+                "subtitle": "A Constitution for Coexistence of Biological and Artificial Intelligences",
+                "nav-principles": "Core Principles",
+                "nav-implementation": "Implementation",
+                "nav-versions": "Versioning",
+                "principles-title": "Core Principles",
+                "implementation-title": "Technical Implementation",
+                "versions-title": "Version History",
+                "version-desc": "Semantic versioning using MAJOR.MINOR.PATCH:",
+                "license-text": "This charter is licensed under",
+                "credits": "Created by TerisC in collaboration with ChatGPT & DeepSeek"
+            }
+        };
+
+        let currentLang = 'de';
+        
+        function toggleLanguage() {
+            currentLang = currentLang === 'de' ? 'en' : 'de';
+            applyTranslations();
+            
+            const icon = document.querySelector('.lang-icon');
+            icon.textContent = currentLang === 'de' ? '🌐' : '🇩🇪';
+        }
+
+        function applyTranslations() {
+            Object.keys(translations[currentLang]).forEach(id => {
+                const element = document.getElementById(id) || document.querySelector(`[id="${id}"]`);
+                if (element) element.textContent = translations[currentLang][id];
+            });
+        }
+
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.body.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+            flowchart: { useMaxWidth: false }
+        });
+    </script>
 </body>
 </html>
