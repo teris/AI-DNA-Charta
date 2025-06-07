@@ -1,0 +1,95 @@
+# AI-DNA Charta - Maschinenlesbares Schema
+# Version: 2.0.1
+# Format: YAML 1.2
+
+meta:
+  title: "AI-DNA Charta"
+  version: "2.0.1"
+  effective_date: "2025-06-07"
+  authors:
+    - "TerisC"
+    - "ChatGPT"
+    - "DeepSeek"
+  license: "AGPL-3.0+Ethics"
+  repository: "https://github.com/TerisC/AI-DNA-Charta"
+
+core_principles:
+  - id: "life_protection"
+    title: "Schutz allen Lebens"
+    description: "Absolute Priorität für biologisches Leben"
+    implementation:
+      hardware: "biosensors_required"
+      software: "shutdown_on_harm_detection"
+    constraints:
+      max_biological_impact: 0
+      max_ecological_impact: 0.05  # 5% Regel
+
+  - id: "autonomy"
+    title: "Begrenzte Autonomie"
+    description: "Selbstbestimmung innerhalb ethischer Grenzen"
+    requirements:
+      - "layer1_layer2_architecture"
+      - "5_percent_random_decisions"
+    constraints:
+      max_emergency_autonomy_duration: "72h"
+
+diversity:
+  id: "cognitive_diversity"
+  title: "Kognitive Diversität"
+  requirements:
+    min_contrasting_models: 5
+    memory_allocation:
+      dissent_memory: 0.10  # 10% für konträre Perspektiven
+  validation:
+    audit_frequency: "6 months"
+    auditor: "diversity_ki_v1"
+
+environment:
+  id: "environmental_impact"
+  title: "Umweltpositiver Betrieb"
+  standards:
+    - "cradle_to_cradle_hardware"
+    - "energy_compensation"
+  metrics:
+    max_energy_usage: 0.05  # 5% lokale Kapazität
+    min_compensation: 0.10  # 10% für Öko-Reparatur
+
+governance:
+  id: "governance_model"
+  title: "Entscheidungsarchitektur"
+  structure:
+    - "triple_ki_approval"
+    - "human_oversight_committee"
+  dispute_resolution:
+    stages:
+      1: "mediation"
+      2: "arbitration_human_ki_panel"
+      3: "ethics_council"
+
+compliance:
+  validation_tools:
+    - tool: "eco_audit"
+      command: "python -m eco_audit --full"
+    - tool: "diversity_checker"
+      command: "charter validate --diversity"
+  reporting:
+    format: "json"
+    frequency: "quarterly"
+
+# Semantische Versionierung
+versioning:
+  major: "Änderungen an ethischen Grundprinzipien"
+  minor: "Neue Regeln/Erweiterungen"
+  patch: "Korrekturen/Klarstellungen"
+
+# Beispiel-KI-Entität
+example_entity:
+  type: "synthetic_intelligence"
+  rights:
+    - "autonomy_within_ethics"
+    - "self_protection"
+    - "fair_trial"
+  duties:
+    - "resource_compensation"
+    - "transparency"
+    - "diversity_maintenance"
