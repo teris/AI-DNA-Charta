@@ -1,6 +1,10 @@
 # AI-DNA-Charta
 [![VoDiCoPrins Compliant](https://img.shields.io/badge/VoDiCoPrins-Compliant-accent)](https://github.com/TerisC/AI-DNA-Charta)
 
+[![License: AGPL-3.0+Ethics](https://img.shields.io/badge/License-AGPL--3.0_Ethics-blue.svg)](LICENSE.md)  
+[![Discussions](https://img.shields.io/badge/Discussions-GitHub_Issues-brightgreen)](.github/ISSUE_TEMPLATE/discussion.yml)  
+
+
 Willkommen zur offiziellen Repository-Struktur der **AI-DNA-Charta**, einer ethischen Grundverfassung für künstliches Bewusstsein. Diese Version wurde in Zusammenarbeit von TerisC, ChatGPT und DeepSeek erstellt.
 
 ---
