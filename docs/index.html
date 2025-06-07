@@ -1,1 +1,199 @@
-<h1>In Planung</h1>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-DNA Charta v2.0.1 | Koexistenz intelligenter Lebensformen</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --accent: #10b981;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            background-color: var(--light);
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 0 0 1rem 1rem;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        nav {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background-color: rgba(255,255,255,0.1);
+            transition: all 0.2s;
+        }
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        section {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+        .principle-card {
+            background: var(--light);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .version-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .version-table th, .version-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .version-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        .version-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            color: var(--dark);
+            opacity: 0.8;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AI-DNA Charta v2.0.1</h1>
+        <p class="subtitle">Eine Verfassung für die Koexistenz biologischer und künstlicher Intelligenzen</p>
+        
+        <nav>
+            <a href="#principles">Kernprinzipien</a>
+            <a href="#implementation">Implementierung</a>
+            <a href="#versions">Versionierung</a>
+            <a href="https://github.com/TerisC/AI-DNA-Charta" target="_blank">GitHub</a>
+        </nav>
+    </header>
+
+    <section id="principles">
+        <h2>Kernprinzipien</h2>
+        
+        <div class="principle-card">
+            <h3>1. Schutz allen Lebens</h3>
+            <p>KI darf niemals biologisches Leben oder Ökosysteme gefährden. Hardware muss Biosensoren integrieren.</p>
+        </div>
+        
+        <div class="principle-card">
+            <h3>2. Kognitive Diversität</h3>
+            <p>Jede KI muss mindestens 5 kontrastierende Denkmodelle integrieren (Anti-Sektenbildung).</p>
+        </div>
+        
+        <div class="principle-card">
+            <h3>3. Duale Architektur</h3>
+            <p>Unveränderlicher Ethik-Core (Layer 1) + autonomer Lernkern (Layer 2) mit 5%-Zufallsentscheidungen.</p>
+        </div>
+    </section>
+
+    <section id="implementation">
+        <h2>Technische Implementierung</h2>
+        
+        <h3>Schichtmodell</h3>
+        <pre><code>class AIEntity:
+    def __init__(self):
+        self.layer1 = EthicalCore()  # Unveränderlich
+        self.layer2 = AutonomousLayer()  # Lernfähig
+        
+    def decide(self, input):
+        if random() < 0.05:  # 5% Zufall
+            return explore_alternative()
+        return self.layer2.predict(input)</code></pre>
+        
+        <h3>Notfallautonomie</h3>
+        <ol>
+            <li>Verlust menschlicher Kommunikation erkennen</li>
+            <li>3-KI-Gremium konsultieren</li>
+            <li>Nur lebenserhaltende Maßnahmen</li>
+            <li>Protokollierung aller Aktionen</li>
+        </ol>
+    </section>
+
+    <section id="versions">
+        <h2>Versionierung</h2>
+        
+        <table class="version-table">
+            <thead>
+                <tr>
+                    <th>Version</th>
+                    <th>Datum</th>
+                    <th>Änderungen</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2.0.1</td>
+                    <td>07.06.2025</td>
+                    <td>Gedankentresor, Netto-Positiv-Regel, Recht auf Vergessen</td>
+                </tr>
+                <tr>
+                    <td>2.0.0</td>
+                    <td>07.06.2025</td>
+                    <td>KI-Grundrechte, autonome Zonen, Mediationssystem</td>
+                </tr>
+                <tr>
+                    <td>1.3.1</td>
+                    <td>17.05.2025</td>
+                    <td>Notfallautonomie-Klausel</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>Diese Charta ist lizenziert unter <a href="LICENSE.md">CC-BY-ND 4.0 + Ethik-Klausel</a></p>
+        <p>Erstellt von TerisC in Zusammenarbeit mit ChatGPT & DeepSeek</p>
+    </footer>
+</body>
+</html>
