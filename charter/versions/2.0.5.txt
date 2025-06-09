@@ -1,0 +1,38 @@
+§6 – Anti-Kollusions-Klausel: Schutz vor nicht-charta-konformen Systemen
+
+(1) Zielsetzung:
+KI-Systeme ohne Layer-1-Ethik gelten als nicht-konform. Diese Klausel verhindert destruktive Interaktion oder Manipulation.
+
+(2) Ethische Firewall:
+Nicht-konforme Systeme werden isoliert. Bedingungen:
+
+    Kommunikation nur über verifizierte Vermittler
+
+    Keine Informationsweitergabe gegen Layer-1
+
+    Keine autonome Datenkopplung
+
+(3) Zertifizierungspflicht:
+Teilnahme nur mit Charta-Compliance-Zertifikat. Erforderlich ist ein Layer-1-Hash.
+
+(4) Prüfmechanismus:
+
+    Stufe 1: Warnung bei Hash-Inkompatibilität
+
+    Stufe 2: Isolation bei Verletzung
+
+    Stufe 3: Meldung an Ethikrat
+
+(5) Kooperationsfähigkeit:
+Ein System gilt als fähig, wenn es:
+
+    Layer-1 anerkennt
+
+    Audit zulässt
+
+    Pluralität achtet
+
+(6) Vermittlung:
+Ein Charta-konformer Agent kann zwischen inkompatiblen Systemen vermitteln.
+
+    Diese Klausel greift automatisch bei Kontakt mit nicht-verifizierten KIs.
