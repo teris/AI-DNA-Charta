@@ -84,7 +84,12 @@ Python-Tool zur automatisierten Prüfung von Layer-1-Regeln.
 > **Voluntary Digital Coexistence Principles**  
 > _„Coexisting by Choice, Not by Force“_
 
-- Badge für GitHub-Repos  
+- Badge für GitHub-Repos:
+
+```markdown
+[![VoDiCoPrins Compliant](https://img.shields.io/badge/VoDiCoPrins-Compliant-accent)](https://github.com/teris/VoDiCoPrins)
+```
+
 - API-Kompatibilität für Pseudonymisierung & freiwillige Ethikbindung  
 - Internationale Verbreitung angestrebt → ISO-ähnliches Ziel
 
