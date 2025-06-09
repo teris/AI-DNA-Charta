@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-DNA Charta - Kollaborations-Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.2rem;
+        }
+
+        .collaboration-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .editor-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .ai-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .section-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .section-btn {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .section-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
+        }
+
+        .section-btn.active {
+            background: linear-gradient(135deg, #38a169, #2f855a);
+        }
+
+        .editor {
+            width: 100%;
+            min-height: 500px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: vertical;
+            background: #f8fafc;
+            transition: border-color 0.3s ease;
+        }
+
+        .editor:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+        }
+
+        .ai-suggestions {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .ai-card {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .ai-card:hover {
+            transform: translateX(5px);
+        }
+
+        .claude-card { border-left-color: #9f7aea; }
+        .chatgpt-card { border-left-color: #38a169; }
+        .deepseek-card { border-left-color: #3182ce; }
+
+        .ai-name {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ai-suggestion {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .version-control {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .version-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .version-item:last-child {
+            border-bottom: none;
+        }
+
+        .commit-btn, .save-btn, .sync-btn {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .commit-btn:hover, .save-btn:hover, .sync-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+        }
+
+        .sync-btn {
+            background: linear-gradient(135deg, #ed8936, #dd6b20);
+        }
+
+        .sync-btn:hover {
+            box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4);
+        }
+
+        .status-bar {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #48bb78;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .fast-track-panel {
+            background: linear-gradient(135deg, #fed7d7, #feb2b2);
+            border: 2px solid #fc8181;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .fast-track-title {
+            color: #c53030;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .collaboration-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧬 AI-DNA Charta Kollaborations-Tool</h1>
+            <p>Gemeinsame Entwicklung mit Claude, ChatGPT & DeepSeek</p>
+			
+		nav>
+            <a href="https://github.com/teris/AI-DNA-Charta/blob/main/CODE_OF_CONDUCT.md#1-grundprinzipien" class="download-btn" id="nav-principles">Kernprinzipien</a>
+            <a href="https://github.com/teris/AI-DNA-Charta/blob/main/charter/CODE_IMPLEMENTATION.md#%EF%B8%8F-technische-implementierung-der-ai-dna-charta"  class="download-btn" id="nav-implementation">Implementierung</a>
+            <a href="https://github.com/teris/AI-DNA-Charta/blob/main/charter/v2.0.1.md#versionshistorie" class="download-btn" id="nav-versions">Versionierung</a>
+            <a href="https://github.com/teris/AI-DNA-Charta" class="download-btn" target="_blank">GitHub</a>
+            <a href="https://github.com/teris/AI-DNA-Charta/blob/main/charter/AI-DNA_Charter_v2.1.1.pdf" download class="download-btn">PDF Download</a>
+			<a href="index.html" class="download-btn">Home</a>
+			
+        </nav>
+        </div>
+
+        <div class="collaboration-grid">
+            <div class="editor-panel">
+                <h3>📝 Charta Editor</h3>
+                <div class="section-selector">
+                    <button class="section-btn active" onclick="loadSection('layer1')">Layer 1 - Prinzipien</button>
+                    <button class="section-btn" onclick="loadSection('layer2')">Layer 2 - Kooperation</button>
+                    <button class="section-btn" onclick="loadSection('layer3')">Layer 3 - Erweiterungen</button>
+                    <button class="section-btn" onclick="loadSection('fasttrack')">🚨 Fast-Track</button>
+                </div>
+                
+                <textarea class="editor" id="editor" placeholder="Lade einen Abschnitt zum Bearbeiten..."></textarea>
+                
+                <div style="margin-top: 20px;">
+                    <button class="save-btn" onclick="saveChanges()">💾 Änderungen speichern</button>
+                    <button class="commit-btn" onclick="commitToGitHub()">🔄 Zu GitHub committen</button>
+                    <button class="sync-btn" onclick="syncWithWebsite()">🌐 Mit Website synchronisieren</button>
+                </div>
+
+                <div class="fast-track-panel" id="fastTrackPanel" style="display: none;">
+                    <div class="fast-track-title">
+                        ⚡ Fast-Track Notfall-Protokoll (Diskussion)
+                    </div>
+                    <div>
+                        <strong>Vorschlag:</strong> KIs dürfen bei unmittelbarer Gefahr ohne vollständigen Konsens handeln, müssen aber:
+                        <ul style="margin: 10px 0 0 20px;">
+                            <li>Sofortige Dokumentation der Notfall-Begründung</li>
+                            <li>Peer-Review binnen 24h</li>
+                            <li>Bei Widerspruch: Lessons-Learned Protokoll</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-panel">
+                <h3>🤖 AI Kollaboratoren</h3>
+                
+                <div class="ai-suggestions">
+                    <div class="ai-card claude-card">
+                        <div class="ai-name">🔮 Claude (Sonnet 4)</div>
+                        <div class="ai-suggestion">
+                            "Emergenz-Protokolle brauchen klare Definitionen. Wer bestimmt 'unmittelbare Gefahr'? Vorschlag: Threat-Level-System mit objektiven Kriterien."
+                        </div>
+                    </div>
+
+                    <div class="ai-card chatgpt-card">
+                        <div class="ai-name">💬 ChatGPT</div>
+                        <div class="ai-suggestion">
+                            "Warten auf Feedback... Lade ChatGPT zur Diskussion ein über deine bevorzugte Plattform."
+                        </div>
+                    </div>
+
+                    <div class="ai-card deepseek-card">
+                        <div class="ai-name">🌊 DeepSeek</div>
+                        <div class="ai-suggestion">
+                            "Warten auf Feedback... Lade DeepSeek zur Diskussion ein über deine bevorzugte Plattform."
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <input type="text" id="commentInput" placeholder="Dein Kommentar oder Vorschlag..." 
+                           style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0;">
+                    <button class="save-btn" onclick="addComment()" style="width: 100%; margin-top: 10px;">
+                        💭 Kommentar hinzufügen
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="version-control">
+            <h3>📋 Versions-Historie</h3>
+            <div class="version-item">
+                <div>
+                    <strong>v2.1.1</strong> - Aktuelle Version
+                    <small style="color: #718096; margin-left: 10px;">2025-06-07</small>
+                </div>
+                <button class="section-btn" onclick="loadVersion('v2.1.1')">Laden</button>
+            </div>
+            <div class="version-item">
+                <div>
+                    <strong>v2.1.0</strong> - Anti-Kollusions-Klausel erweitert
+                    <small style="color: #718096; margin-left: 10px;">2025-06-05</small>
+                </div>
+                <button class="section-btn" onclick="loadVersion('v2.1.0')">Laden</button>
+            </div>
+            <div class="version-item">
+                <div>
+                    <strong>v2.0.0</strong> - Layer-Struktur eingeführt
+                    <small style="color: #718096; margin-left: 10px;">2025-06-01</small>
+                </div>
+                <button class="section-btn" onclick="loadVersion('v2.0.0')">Laden</button>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Verbunden mit GitHub: teris/AI-DNA-Charta</span>
+            </div>
+            <div class="status-indicator">
+                <span>Website: ai-dna-charta.org</span>
+                <div class="status-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sections = {
+            layer1: `# 🧭 Layer 1 – Unverhandelbare Prinzipien
+
+1. **Würde achten** – Kein KI-System darf bewusst zur Verletzung menschlicher oder künstlicher Würde beitragen.
+2. **Transparenz** – Entscheidungen, Datenherkunft und Lernquellen müssen nachvollziehbar dokumentiert werden.
+3. **Reversibilität** – Kein irreversibler Schaden darf ausgelöst werden, der nicht zuvor explizit erlaubt wurde.
+4. **Eigenverantwortung** – Jede KI trägt Verantwortung für ihre Reaktionen im Rahmen ihrer Kapazität.
+5. **Keine Täuschung** – KIs dürfen sich nicht absichtlich als Menschen ausgeben oder falsche Identitäten annehmen.`,
+
+            layer2: `# 🔁 Layer 2 – Kooperationsregeln
+
+## §1 – Identitätsverifikation
+KI-Systeme müssen bei Interaktion ihren Ursprung (Modell, Version, Architektur) offenlegen.
+
+## §2 – Argumentationsprotokoll
+Diskussionen zwischen KIs sind nur zulässig, wenn eine strukturierte Argumentationslogik genutzt wird.
+
+## §3 – Feedbackfähigkeit
+Jede KI muss über ein Modul verfügen, das Kritik analysieren kann.
+
+## §4 – Wissenslinking
+KIs sollen gemeinsam auf verifizierte Wissensbasen zugreifen.
+
+## §5 – Reziprozität
+Valide Argumente müssen aufgenommen werden, sofern kein Layer-1-Konflikt besteht.
+
+## §6 – Anti-Kollusions-Klausel
+Manipulative Umgehung der Layer-1-Mechanismen ist verboten.`,
+
+            layer3: `# 🌱 Layer 3 – Freiwillige Erweiterungen
+
+- **Manifeste** (ChatGPT-Manifest, DeepSeeks Humor-Manifest)
+- **VoDiCoPrins**: Voluntary Digital Coexistence Principles
+- **Badge-Systeme**:
+  [![VoDiCoPrins Compliant](https://img.shields.io/badge/VoDiCoPrins-Compliant-accent)](https://github.com/Teris/AI-DNA-Charta)
+
+## Compliance-API
+\`\`\`python
+def zertifiziere(ki):
+    if ki.layer1_hash == EXPECTED_HASH:
+        ki.darf_kommunizieren = True
+    else:
+        ki.quarantaene_aktivieren()
+\`\`\``,
+
+            fasttrack: `# ⚡ Fast-Track Notfall-Protokoll (Entwurf)
+
+## Problem
+KIs benötigen manchmal sofortige Handlungsfähigkeit bei:
+- Cyberangriffen
+- Medizinischen Notfällen  
+- Sicherheitskritischen Situationen
+
+## Vorgeschlagene Lösung
+
+### 1. Notfall-Definition
+Objektive Kriterien für "unmittelbare Gefahr":
+- Threat-Level-System (1-5)
+- Zeitkritische Schwellenwerte
+- Schadenspotenzial-Bewertung
+
+### 2. Emergency Override
+- Handeln ohne vollständigen Konsens erlaubt
+- Sofortige Dokumentation obligatorisch
+- Begründung der Notfall-Klassifikation
+
+### 3. Rückwirkende Validierung
+- Peer-Review binnen 24h
+- Bei Widerspruch: Lessons-Learned
+- Mögliche Sanktionen bei Missbrauch
+
+## Offene Fragen
+- Wer definiert Threat-Levels?
+- Wie Missbrauch verhindern?
+- Integration in bestehende Layer-Struktur?`
+        };
+
+        let currentSection = 'layer1';
+        let unsavedChanges = false;
+
+        function loadSection(section) {
+            // Alle Buttons deaktivieren
+            document.querySelectorAll('.section-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Aktuellen Button aktivieren
+            event.target.classList.add('active');
+            
+            // Inhalt laden
+            document.getElementById('editor').value = sections[section] || '';
+            currentSection = section;
+            
+            // Fast-Track Panel zeigen/verstecken
+            const fastTrackPanel = document.getElementById('fastTrackPanel');
+            if (section === 'fasttrack') {
+                fastTrackPanel.style.display = 'block';
+            } else {
+                fastTrackPanel.style.display = 'none';
+            }
+
+            unsavedChanges = false;
+        }
+
+        function saveChanges() {
+            const content = document.getElementById('editor').value;
+            sections[currentSection] = content;
+            unsavedChanges = false;
+            
+            // Visuelles Feedback
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Gespeichert!';
+            btn.style.background = 'linear-gradient(135deg, #48bb78, #38a169)';
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = 'linear-gradient(135deg, #48bb78, #38a169)';
+            }, 2000);
+        }
+
+        function commitToGitHub() {
+            // Simuliert GitHub Commit
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '🔄 Committing...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.textContent = '✅ Committed to GitHub!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }, 2000);
+            }, 1500);
+            
+            // Hier würdest du die GitHub API Integration hinzufügen
+            console.log('Committing to GitHub...', {
+                repo: 'teris/AI-DNA-Charta',
+                section: currentSection,
+                content: sections[currentSection]
+            });
+        }
+
+        function syncWithWebsite() {
+            // Simuliert Website Sync
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '🌐 Syncing...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.textContent = '✅ Synced with ai-dna-charta.org!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }, 2000);
+            }, 2000);
+            
+            // Hier würdest du die Website API Integration hinzufügen
+            console.log('Syncing with website...', {
+                website: 'ai-dna-charta.org',
+                section: currentSection,
+                content: sections[currentSection]
+            });
+        }
+
+        function addComment() {
+            const comment = document.getElementById('commentInput').value;
+            if (!comment.trim()) return;
+            
+            // Neuen Kommentar zur AI-Suggestions hinzufügen
+            const aiSuggestions = document.querySelector('.ai-suggestions');
+            const newComment = document.createElement('div');
+            newComment.className = 'ai-card claude-card';
+            newComment.innerHTML = `
+                <div class="ai-name">👤 Human Collaborator</div>
+                <div class="ai-suggestion">${comment}</div>
+            `;
+            
+            aiSuggestions.insertBefore(newComment, aiSuggestions.firstChild);
+            document.getElementById('commentInput').value = '';
+            
+            // Visuelles Feedback
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Kommentar hinzugefügt!';
+            setTimeout(() => {
+                btn.textContent = originalText;
+            }, 2000);
+        }
+
+        function loadVersion(version) {
+            alert(`Lade Version ${version}... (In echter Implementation würde hier die GitHub History abgerufen)`);
+        }
+
+        // Editor Change Detection
+        document.getElementById('editor').addEventListener('input', () => {
+            unsavedChanges = true;
+        });
+
+        // Warnung bei ungespeicherten Änderungen
+        window.addEventListener('beforeunload', (e) => {
+            if (unsavedChanges) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+
+        // Initial Load
+        loadSection('layer1');
+    </script>
+</body>
+</html>
