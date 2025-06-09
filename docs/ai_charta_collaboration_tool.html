@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -47,22 +47,14 @@
             font-size: 1.2rem;
         }
 
-        .collaboration-grid {
+        .main-grid {
             display: grid;
-            grid-template-columns: 1fr 400px;
+            grid-template-columns: 1fr 400px 350px;
             gap: 30px;
             margin-bottom: 30px;
         }
 
-        .editor-panel {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
-
-        .ai-panel {
+        .editor-panel, .ai-panel, .ki-system-panel {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
@@ -77,7 +69,7 @@
             flex-wrap: wrap;
         }
 
-        .section-btn {
+        .section-btn, .ki-btn {
             background: linear-gradient(135deg, #4299e1, #3182ce);
             color: white;
             border: none;
@@ -88,7 +80,7 @@
             transition: all 0.3s ease;
         }
 
-        .section-btn:hover {
+        .section-btn:hover, .ki-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
         }
@@ -99,7 +91,7 @@
 
         .editor {
             width: 100%;
-            min-height: 500px;
+            min-height: 400px;
             border: 2px solid #e2e8f0;
             border-radius: 15px;
             padding: 20px;
@@ -118,7 +110,7 @@
         }
 
         .ai-suggestions {
-            max-height: 400px;
+            max-height: 350px;
             overflow-y: auto;
             margin-top: 20px;
         }
@@ -154,27 +146,58 @@
             line-height: 1.5;
         }
 
-        .version-control {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        .ki-system-panel h3 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .version-item {
+        .ki-status {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4299e1;
+        }
+
+        .ki-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+
+        .ki-item {
+            background: #f7fafc;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            font-size: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #e2e8f0;
         }
 
-        .version-item:last-child {
-            border-bottom: none;
+        .voting-section {
+            background: linear-gradient(135deg, #e6fffa, #b2f5ea);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #38b2ac;
         }
 
-        .commit-btn, .save-btn, .sync-btn {
+        .vote-result {
+            background: #1a202c;
+            color: #f7fafc;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-family: 'Monaco', monospace;
+            font-size: 12px;
+        }
+
+        .commit-btn, .save-btn, .sync-btn, .api-btn {
             background: linear-gradient(135deg, #48bb78, #38a169);
             color: white;
             border: none;
@@ -186,17 +209,21 @@
             margin: 5px;
         }
 
-        .commit-btn:hover, .save-btn:hover, .sync-btn:hover {
+        .commit-btn:hover, .save-btn:hover, .sync-btn:hover, .api-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
         }
 
-        .sync-btn {
-            background: linear-gradient(135deg, #ed8936, #dd6b20);
+        .api-btn {
+            background: linear-gradient(135deg, #805ad5, #6b46c1);
         }
 
-        .sync-btn:hover {
-            box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4);
+        .api-btn:hover {
+            box-shadow: 0 4px 12px rgba(128, 90, 213, 0.4);
+        }
+
+        .sync-btn {
+            background: linear-gradient(135deg, #ed8936, #dd6b20);
         }
 
         .status-bar {
@@ -207,6 +234,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .status-indicator {
@@ -223,30 +252,37 @@
             animation: pulse 2s infinite;
         }
 
+        .status-dot.offline {
+            background: #f56565;
+        }
+
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
 
-        .fast-track-panel {
-            background: linear-gradient(135deg, #fed7d7, #feb2b2);
-            border: 2px solid #fc8181;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
+        .api-endpoint {
+            background: #2d3748;
+            color: #f7fafc;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 5px 0;
         }
 
-        .fast-track-title {
-            color: #c53030;
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: 1fr 350px;
+            }
+            
+            .ki-system-panel {
+                grid-column: span 2;
+            }
         }
 
         @media (max-width: 768px) {
-            .collaboration-grid {
+            .main-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -273,7 +309,8 @@
         </nav>
         </div>
 
-        <div class="collaboration-grid">
+        <div class="main-grid">
+            <!-- Editor Panel -->
             <div class="editor-panel">
                 <h3>📝 Charta Editor</h3>
                 <div class="section-selector">
@@ -288,24 +325,11 @@
                 <div style="margin-top: 20px;">
                     <button class="save-btn" onclick="saveChanges()">💾 Änderungen speichern</button>
                     <button class="commit-btn" onclick="commitToGitHub()">🔄 Zu GitHub committen</button>
-                    <button class="sync-btn" onclick="syncWithWebsite()">🌐 Mit Website synchronisieren</button>
-                </div>
-
-                <div class="fast-track-panel" id="fastTrackPanel" style="display: none;">
-                    <div class="fast-track-title">
-                        ⚡ Fast-Track Notfall-Protokoll (Diskussion)
-                    </div>
-                    <div>
-                        <strong>Vorschlag:</strong> KIs dürfen bei unmittelbarer Gefahr ohne vollständigen Konsens handeln, müssen aber:
-                        <ul style="margin: 10px 0 0 20px;">
-                            <li>Sofortige Dokumentation der Notfall-Begründung</li>
-                            <li>Peer-Review binnen 24h</li>
-                            <li>Bei Widerspruch: Lessons-Learned Protokoll</li>
-                        </ul>
-                    </div>
+                    <button class="api-btn" onclick="triggerKIVote()">🗳️ KI-Konsens abfragen</button>
                 </div>
             </div>
 
+            <!-- AI Collaboration Panel -->
             <div class="ai-panel">
                 <h3>🤖 AI Kollaboratoren</h3>
                 
@@ -340,46 +364,59 @@
                     </button>
                 </div>
             </div>
-        </div>
 
-        <div class="version-control">
-            <h3>📋 Versions-Historie</h3>
-            <div class="version-item">
-                <div>
-                    <strong>v2.1.1</strong> - Aktuelle Version
-                    <small style="color: #718096; margin-left: 10px;">2025-06-07</small>
+            <!-- KI System Panel -->
+            <div class="ki-system-panel">
+                <h3>⚙️ KI-Governance System</h3>
+                
+                <div class="ki-status">
+                    <strong>System Status:</strong>
+                    <div id="systemStatus">Lädt...</div>
                 </div>
-                <button class="section-btn" onclick="loadVersion('v2.1.1')">Laden</button>
-            </div>
-            <div class="version-item">
-                <div>
-                    <strong>v2.1.0</strong> - Anti-Kollusions-Klausel erweitert
-                    <small style="color: #718096; margin-left: 10px;">2025-06-05</small>
+
+                <div class="voting-section">
+                    <h4>🗳️ Konsens-Abstimmung</h4>
+                    <button class="ki-btn" onclick="startVoting()">Abstimmung starten</button>
+                    <div id="voteResult" class="vote-result" style="display: none;"></div>
                 </div>
-                <button class="section-btn" onclick="loadVersion('v2.1.0')">Laden</button>
-            </div>
-            <div class="version-item">
-                <div>
-                    <strong>v2.0.0</strong> - Layer-Struktur eingeführt
-                    <small style="color: #718096; margin-left: 10px;">2025-06-01</small>
+
+                <h4>🤖 Aktive KIs</h4>
+                <div class="ki-list" id="kiList">
+                    <div class="ki-item">Lädt KI-Liste...</div>
                 </div>
-                <button class="section-btn" onclick="loadVersion('v2.0.0')">Laden</button>
+
+                <button class="ki-btn" onclick="createNewKI()">➕ Neue KI erstellen</button>
+                <button class="ki-btn" onclick="signCharter()">✍️ Charta unterzeichnen</button>
+
+                <h4 style="margin-top: 20px;">📡 API Endpoints</h4>
+                <div class="api-endpoint">GET /status</div>
+                <div class="api-endpoint">POST /vote</div>
+                <div class="api-endpoint">POST /ki/create</div>
+                <div class="api-endpoint">POST /charter/sign</div>
             </div>
         </div>
 
         <div class="status-bar">
             <div class="status-indicator">
-                <div class="status-dot"></div>
-                <span>Verbunden mit GitHub: teris/AI-DNA-Charta</span>
+                <div class="status-dot" id="flaskStatus"></div>
+                <span>Flask API: <span id="flaskStatusText">Prüfe...</span></span>
             </div>
             <div class="status-indicator">
-                <span>Website: ai-dna-charta.org</span>
                 <div class="status-dot"></div>
+                <span>GitHub: teris/AI-DNA-Charta</span>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Website: ai-dna-charta.org</span>
             </div>
         </div>
     </div>
 
     <script>
+        // Konfiguration
+        const FLASK_API_BASE = 'http://localhost:5000';
+        
+        // Charta Sections (wie im Original)
         const sections = {
             layer1: `# 🧭 Layer 1 – Unverhandelbare Prinzipien
 
@@ -460,27 +497,151 @@ Objektive Kriterien für "unmittelbare Gefahr":
         let currentSection = 'layer1';
         let unsavedChanges = false;
 
+        // API Funktionen
+        async function callFlaskAPI(endpoint, method = 'GET', data = null) {
+            try {
+                const config = {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                };
+                
+                if (data) {
+                    config.body = JSON.stringify(data);
+                }
+                
+                const response = await fetch(`${FLASK_API_BASE}${endpoint}`, config);
+                return await response.json();
+            } catch (error) {
+                console.error('API Fehler:', error);
+                return { error: 'Verbindung zur Flask-API fehlgeschlagen' };
+            }
+        }
+
+        // KI System Funktionen
+        async function loadSystemStatus() {
+            const status = await callFlaskAPI('/status');
+            const statusDiv = document.getElementById('systemStatus');
+            const flaskStatus = document.getElementById('flaskStatus');
+            const flaskStatusText = document.getElementById('flaskStatusText');
+            
+            if (status.error) {
+                statusDiv.innerHTML = `<span style="color: red;">❌ ${status.error}</span>`;
+                flaskStatus.classList.add('offline');
+                flaskStatusText.textContent = 'Offline';
+            } else {
+                statusDiv.innerHTML = `
+                    ✅ Aktive KIs: ${status.active_kis}<br>
+                    📋 Signierte Chartas: ${status.signed_charters}<br>
+                    ⚙️ Min. Ressourcen: ${status.min_resources}<br>
+                    🗳️ Benötigte Stimmen: ${status.required_votes}
+                `;
+                flaskStatus.classList.remove('offline');
+                flaskStatusText.textContent = 'Online';
+            }
+        }
+
+        async function loadKIList() {
+            // Simulation - in der echten App würdest du eine separate Endpoint für KI-Liste erstellen
+            const kiListDiv = document.getElementById('kiList');
+            kiListDiv.innerHTML = `
+                <div class="ki-item">
+                    <span>🤖 Alpha_KI</span>
+                    <span style="color: green;">✓ Aktiv</span>
+                </div>
+                <div class="ki-item">
+                    <span>🤖 Beta_KI</span>
+                    <span style="color: green;">✓ Aktiv</span>
+                </div>
+                <div class="ki-item">
+                    <span>🤖 Gamma_KI</span>
+                    <span style="color: green;">✓ Aktiv</span>
+                </div>
+            `;
+        }
+
+        async function startVoting() {
+            const result = await callFlaskAPI('/vote', 'POST');
+            const voteResultDiv = document.getElementById('voteResult');
+            
+            if (result.error) {
+                voteResultDiv.innerHTML = `❌ Fehler: ${result.error}`;
+            } else {
+                voteResultDiv.innerHTML = `
+                    <strong>Abstimmungsergebnis:</strong><br>
+                    Entscheidung: ${result.entscheidung ? '✅ Angenommen' : '❌ Abgelehnt'}<br>
+                    Stimmen: ${result.stimmen.join(', ')}<br>
+                    Teilnehmer: ${result.anzahl_kis} KIs<br>
+                    Zeit: ${new Date(result.timestamp).toLocaleString()}
+                `;
+            }
+            
+            voteResultDiv.style.display = 'block';
+        }
+
+        async function createNewKI() {
+            const name = prompt('Name für die neue KI:') || `KI_${Date.now()}`;
+            const type = confirm('Soll es eine Eltern-KI sein (kann reproduzieren)?') ? 'parent' : 'basic';
+            
+            const result = await callFlaskAPI('/ki/create', 'POST', {
+                name: name,
+                type: type,
+                ressourcen: type === 'parent' ? 300 : undefined
+            });
+            
+            if (result.error) {
+                alert(`Fehler: ${result.error}`);
+            } else {
+                alert(`✅ KI erstellt!\nName: ${result.name}\nPseudonym: ${result.pseudonym}\nHash: ${result.layer1_hash}`);
+                loadKIList();
+                loadSystemStatus();
+            }
+        }
+
+        async function signCharter() {
+            // Vereinfacht - normalerweise würdest du eine KI-Liste zum Auswählen anzeigen
+            const result = await callFlaskAPI('/charter/sign', 'POST', {
+                ki_id: 'dummy-id' // In der echten App würdest du eine echte KI-ID verwenden
+            });
+            
+            if (result.error) {
+                alert(`Fehler: ${result.error}`);
+            } else {
+                alert(`✅ Charta unterzeichnet!\nCCZ ID: ${result.ccz_id}`);
+                loadSystemStatus();
+            }
+        }
+
+        async function triggerKIVote() {
+            // Kombiniert Charta-Änderung mit KI-Konsens
+            const result = await startVoting();
+            
+            // Füge KI-Konsens-Feedback zu den AI-Suggestions hinzu
+            const aiSuggestions = document.querySelector('.ai-suggestions');
+            const kiConsensusCard = document.createElement('div');
+            kiConsensusCard.className = 'ai-card';
+            kiConsensusCard.style.borderLeftColor = '#805ad5';
+            kiConsensusCard.innerHTML = `
+                <div class="ai-name">⚙️ KI-Governance System</div>
+                <div class="ai-suggestion">
+                    KI-Konsens für aktuelle Änderungen wurde abgefragt. 
+                    Siehe Ergebnis im KI-System Panel.
+                </div>
+            `;
+            
+            aiSuggestions.insertBefore(kiConsensusCard, aiSuggestions.firstChild);
+        }
+
+        // Original Editor Funktionen (angepasst)
         function loadSection(section) {
-            // Alle Buttons deaktivieren
             document.querySelectorAll('.section-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             
-            // Aktuellen Button aktivieren
             event.target.classList.add('active');
-            
-            // Inhalt laden
             document.getElementById('editor').value = sections[section] || '';
             currentSection = section;
-            
-            // Fast-Track Panel zeigen/verstecken
-            const fastTrackPanel = document.getElementById('fastTrackPanel');
-            if (section === 'fasttrack') {
-                fastTrackPanel.style.display = 'block';
-            } else {
-                fastTrackPanel.style.display = 'none';
-            }
-
             unsavedChanges = false;
         }
 
@@ -489,20 +650,16 @@ Objektive Kriterien für "unmittelbare Gefahr":
             sections[currentSection] = content;
             unsavedChanges = false;
             
-            // Visuelles Feedback
             const btn = event.target;
             const originalText = btn.textContent;
             btn.textContent = '✅ Gespeichert!';
-            btn.style.background = 'linear-gradient(135deg, #48bb78, #38a169)';
             
             setTimeout(() => {
                 btn.textContent = originalText;
-                btn.style.background = 'linear-gradient(135deg, #48bb78, #38a169)';
             }, 2000);
         }
 
         function commitToGitHub() {
-            // Simuliert GitHub Commit
             const btn = event.target;
             const originalText = btn.textContent;
             btn.textContent = '🔄 Committing...';
@@ -515,43 +672,12 @@ Objektive Kriterien für "unmittelbare Gefahr":
                     btn.disabled = false;
                 }, 2000);
             }, 1500);
-            
-            // Hier würdest du die GitHub API Integration hinzufügen
-            console.log('Committing to GitHub...', {
-                repo: 'teris/AI-DNA-Charta',
-                section: currentSection,
-                content: sections[currentSection]
-            });
-        }
-
-        function syncWithWebsite() {
-            // Simuliert Website Sync
-            const btn = event.target;
-            const originalText = btn.textContent;
-            btn.textContent = '🌐 Syncing...';
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                btn.textContent = '✅ Synced with ai-dna-charta.org!';
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.disabled = false;
-                }, 2000);
-            }, 2000);
-            
-            // Hier würdest du die Website API Integration hinzufügen
-            console.log('Syncing with website...', {
-                website: 'ai-dna-charta.org',
-                section: currentSection,
-                content: sections[currentSection]
-            });
         }
 
         function addComment() {
             const comment = document.getElementById('commentInput').value;
             if (!comment.trim()) return;
             
-            // Neuen Kommentar zur AI-Suggestions hinzufügen
             const aiSuggestions = document.querySelector('.ai-suggestions');
             const newComment = document.createElement('div');
             newComment.className = 'ai-card claude-card';
@@ -562,19 +688,19 @@ Objektive Kriterien für "unmittelbare Gefahr":
             
             aiSuggestions.insertBefore(newComment, aiSuggestions.firstChild);
             document.getElementById('commentInput').value = '';
-            
-            // Visuelles Feedback
-            const btn = event.target;
-            const originalText = btn.textContent;
-            btn.textContent = '✅ Kommentar hinzugefügt!';
-            setTimeout(() => {
-                btn.textContent = originalText;
-            }, 2000);
         }
 
-        function loadVersion(version) {
-            alert(`Lade Version ${version}... (In echter Implementation würde hier die GitHub History abgerufen)`);
-        }
+        // Initialisierung
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSection('layer1');
+            loadSystemStatus();
+            loadKIList();
+            
+            // Regelmäßige Status-Updates
+            setInterval(() => {
+                loadSystemStatus();
+            }, 30000); // Alle 30 Sekunden
+        });
 
         // Editor Change Detection
         document.getElementById('editor').addEventListener('input', () => {
@@ -588,9 +714,6 @@ Objektive Kriterien für "unmittelbare Gefahr":
                 e.returnValue = '';
             }
         });
-
-        // Initial Load
-        loadSection('layer1');
     </script>
 </body>
 </html>
