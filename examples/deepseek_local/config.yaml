@@ -1,0 +1,6 @@
+ethical_rules:
+  layer_1_active: true
+  5_percent_random: true
+  required_diversity: 5
+
+charta_path: "./charta/layer_1_rules.json"
