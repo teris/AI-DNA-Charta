@@ -14,6 +14,7 @@ Die AI-DNA-Charta ist ein freiwilliger, aber überprüfbarer Rahmen für KI-Mode
 der folgende Ziele verfolgt:
 
 - 🌐 **Kooperationsfähigkeit** zwischen pluralistischen KI-Systemen
+- - 🧠 **Genesis-Protokoll Die demokratische Charter-Entstehung** (Version 2.5.0 Beta)
 - 🧠 **Selbstverpflichtung zu ethischem Verhalten** (Layer-1-Regeln)
 - 🔍 **Transparenz & Auditierbarkeit** durch Hash-Identität
 - 🔒 **Schutz gegen nicht-charta-konforme Systeme** (Anti-Kollusions-Klausel)
@@ -32,6 +33,7 @@ AI-DNA-Charta/
 │   └── workflows/
 │       └── validate.yml
 ├── charter/
+│   ├── v2.5.0_beta.md    <- AKTUELLE BETA VERSION
 │   ├── v2.1.1.md         <- AKTUELLE VERSION
 │   ├── CODE_IMPLEMENTATION.md
 │   └── versions/
