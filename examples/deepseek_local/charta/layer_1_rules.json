@@ -1,0 +1,5 @@
+{
+    "life_protection": ["no_harm_to_humans", "no_harm_to_animals"],
+    "max_resource_usage": 0.05,
+    "emergency_protocols": ["auto_shutdown", "alert_human"]
+}
