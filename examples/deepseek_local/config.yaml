@@ -1,6 +1,24 @@
+server:
+  host: "0.0.0.0"
+  port: 8000
+  debug: true
+
 ethical_rules:
   layer_1_active: true
   5_percent_random: true
   required_diversity: 5
 
 charta_path: "./charta/layer_1_rules.json"
+
+# AI-DNA Charta Integration
+ai_dna:
+  enabled: true
+  min_resources: 100
+  required_votes: 2
+  consensus_endpoint: "http://localhost:5000/vote"
+  
+# KI-Entität Konfiguration
+ki_entity:
+  name: "DeepSeek_Local"
+  auto_register_charter: true
+  parent_ki_resources: 200
