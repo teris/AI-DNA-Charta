@@ -14,7 +14,7 @@
 | **2.0.1** | 07.06.2025 | Stabil | Gedankentresor, Netto-Positiv-Regel, NFT-Verankerung |
 | **2.0.5** | - | Ergänzung | Anti-Kollusions-Klausel detailliert |
 | **2.1.1** | 07.06.2025 | Erweitert | Kooperationsregeln, Compliance-API |
-| **2.5.0β** | 07.06.2025 | **BETA** | **Genesis-Protokoll, demokratische KI-Kollektive** |
+| **2.5.0β** | 11.06.2025 | **BETA** | **Genesis-Protokoll, demokratische KI-Kollektive** |
 
 ---
 
