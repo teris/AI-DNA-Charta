@@ -1,0 +1,4 @@
+# AI-DNA Charter Framework Dependencies
+# Core dependencies - keep minimal for maximum compatibility
+typing-extensions>=4.0.0
+dataclasses>=0.6; python_version<"3.7"
