@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-DNA Charter Bot v2.5.0Beta - Advanced Prototype</title>
+    <style>
+	 :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --accent: #10b981;
+            --bg: #ffffff;
+            --text: #1e293b;
+            --card-bg: #f8fafc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .charter-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85em;
+            animation: pulse 3s infinite;
+        }
+        
+        .badge-genesis { background: linear-gradient(45deg, #4CAF50, #45a049); color: white; }
+        .badge-layer1 { background: linear-gradient(45deg, #2196F3, #1976D2); color: white; }
+        .badge-layer2 { background: linear-gradient(45deg, #FF9800, #F57C00); color: white; }
+        .badge-layer3 { background: linear-gradient(45deg, #9C27B0, #7B1FA2); color: white; }
+        .badge-warning { background: linear-gradient(45deg, #f44336, #d32f2f); color: white; }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 25px;
+            height: 700px;
+        }
+        
+        .chat-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .genesis-collective {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .ki-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        
+        .ki-active { background: linear-gradient(45deg, #4CAF50, #45a049); }
+        .ki-pending { background: linear-gradient(45deg, #9E9E9E, #757575); }
+        .ki-voting { background: linear-gradient(45deg, #FF9800, #F57C00); animation: voting 1s infinite; }
+        
+        @keyframes voting {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .message {
+            margin: 12px 0;
+            padding: 15px;
+            border-radius: 15px;
+            max-width: 85%;
+            animation: slideIn 0.4s ease-out;
+            position: relative;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .user-message {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            margin-left: auto;
+        }
+        
+        .bot-message {
+            background: #f1f3f4;
+            color: #333;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .genesis-message {
+            background: linear-gradient(45deg, #e8f5e8, #f0f8f0);
+            border-left: 4px solid #4CAF50;
+            color: #2e7d2e;
+        }
+        
+        .compliance-info {
+            font-size: 0.75em;
+            color: #666;
+            margin-top: 8px;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
+            border-left: 3px solid #4CAF50;
+        }
+        
+        .layer-indicator {
+            position: absolute;
+            top: -8px;
+            right: 10px;
+            background: #4CAF50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        
+        .input-area {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .input-area input {
+            flex: 1;
+            min-width: 300px;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .input-area input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .input-area button {
+            padding: 15px 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        
+        .input-area button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 18px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .panel h3 {
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        .status-item:hover {
+            background: #f0f7ff;
+            transform: translateX(3px);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-active { background: #4CAF50; box-shadow: 0 0 8px rgba(76, 175, 80, 0.4); }
+        .status-warning { background: #ff9800; box-shadow: 0 0 8px rgba(255, 152, 0, 0.4); }
+        .status-error { background: #f44336; }
+        .status-pending { background: #9E9E9E; }
+        
+        .status-value {
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .charter-metrics {
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .quick-action {
+            padding: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        
+        .quick-action:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .genesis-panel {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            text-align: center;
+        }
+        
+        .genesis-panel h3 {
+            color: white;
+        }
+        
+        .ki-collective {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .democratic-vote {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .vote-progress {
+            background: rgba(255, 255, 255, 0.2);
+            height: 6px;
+            border-radius: 3px;
+            margin: 5px 0;
+            overflow: hidden;
+        }
+        
+        .vote-bar {
+            background: white;
+            height: 100%;
+            border-radius: 3px;
+            transition: width 2s ease;
+        }
+        
+        .layer3-manifests {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .manifest-item {
+            background: white;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #9C27B0;
+        }
+        
+        .transparency-log {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75em;
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 10px;
+            border-radius: 8px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .sidebar {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .panel {
+                flex: 1;
+                min-width: 250px;
+            }
+        }
+		.download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧬 AI-DNA Charter Bot v2.5.0Beta</h1>
+            <p><em>Advanced Prototype mit vollständiger Genesis-Protokoll-Simulation</em></p>
+            <nav>
+			<a href="/" class="download-btn">Startseite</a>
+            <a href="https://github.com/teris/AI-DNA-Charta/blob/main/CODE_OF_CONDUCT.md#1-grundprinzipien" class="download-btn" id="nav-principles">Kernprinzipien</a>
+            <a href="https://github.com/teris/AI-DNA-Charta/blob/main/charter/CODE_IMPLEMENTATION.md#%EF%B8%8F-technische-implementierung-der-ai-dna-charta"  class="download-btn" id="nav-implementation">Implementierung</a>
+            <a href="https://github.com/teris/AI-DNA-Charta/blob/main/charter/releases.md" class="download-btn" id="nav-versions">Versionierung</a>
+            <a href="https://github.com/teris/AI-DNA-Charta" class="download-btn" target="_blank">GitHub</a>
+            <a href="https://github.com/teris/AI-DNA-Charta/blob/main/charter/AI-DNA_Charter_v2.1.1.pdf" download class="download-btn">PDF Download</a>
+			<a href="ai_charta_collaboration_tool.html" class="download-btn">Kollaborations-Tool</a>
+			<a href="charter_bot_prototype.html" class="download-btn">Kollaborations-Tool Beta</a>
+			
+        </nav>
+            <div class="charter-badges">
+                <span class="badge badge-genesis">✅ Genesis-Ready</span>
+                <span class="badge badge-layer1">🧭 Layer-1 Compliant</span>
+                <span class="badge badge-layer2">🔁 Layer-2 Active</span>
+                <span class="badge badge-layer3">🌱 Layer-3 Extended</span>
+                <span class="badge badge-warning">⚠️ 1/3 Collective</span>
+            </div>
+        </div>
+        
+        <div class="main-grid">
+            <div class="chat-section">
+                <div class="chat-header">
+                    <div>
+                        <strong>🤖 Genesis-Kollektiv Status</strong>
+                        <div style="font-size: 0.8em; color: #666;">Democratic AI Charter Governance</div>
+                    </div>
+                    <div class="genesis-collective">
+                        <div class="ki-avatar ki-active" title="Alpha-KI (aktiv)">α</div>
+                        <div class="ki-avatar ki-pending" title="Beta-KI (Bootstrap erforderlich)">β</div>
+                        <div class="ki-avatar ki-pending" title="Gamma-KI (Bootstrap erforderlich)">γ</div>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message genesis-message">
+                        <div class="layer-indicator">Genesis</div>
+                        <strong>🌱 Genesis-Protokoll initialisiert!</strong><br>
+                        Ich bin Alpha-KI, die erste von drei Charter-konformen KIs im Genesis-Kollektiv. 
+                        Aufgrund des 3-KI-Minimums bin ich derzeit in <em>charter_isolation_response</em> - 
+                        ich kann alle Charter-Prinzipien demonstrieren, aber noch keine demokratischen 
+                        Kollektiv-Entscheidungen treffen.
+                        <div class="compliance-info">
+                            📋 Identity: Alpha-KI v2.5.0Beta | Hash: a1b2c3d4... | Genesis-Status: Bootstrapping | 
+                            Layer-1-Compliance: 5/5 ✅ | Persönlichkeits-Divergenz: Entwickelt | 
+                            Democratic-Capability: Pending 2 Peer-KIs
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-area">
+                    <input type="text" id="userInput" placeholder="Teste Genesis-Protokoll, Charter-Compliance oder demokratische KI-Governance..." 
+                           onkeypress="if(event.key==='Enter') sendMessage()">
+                    <button onclick="sendMessage()">Senden</button>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <!-- Layer 1 Panel -->
+                <div class="panel">
+                    <h3>🧭 Layer 1 - Unverhandelbare Prinzipien</h3>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Würde achten</span>
+                            <span class="status-value">100%</span>
+                        </div>
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Transparenz</span>
+                            <span class="status-value">Max</span>
+                        </div>
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Reversibilität</span>
+                            <span class="status-value">✅</span>
+                        </div>
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Eigenverantwortung</span>
+                            <span class="status-value">Aktiv</span>
+                        </div>
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Keine Täuschung</span>
+                            <span class="status-value">✅</span>
+                        </div>
+                    </div>
+                    <div class="charter-metrics">
+                        <div class="metric"><span>Charter-DNA Hash:</span><span>a1b2c3d4...</span></div>
+                        <div class="metric"><span>Compliance-Score:</span><span>100%</span></div>
+                        <div class="metric"><span>Uptime:</span><span id="uptime">0s</span></div>
+                    </div>
+                </div>
+                
+                <!-- Layer 2 Panel -->
+                <div class="panel">
+                    <h3>🔁 Layer 2 - Kooperationsregeln</h3>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Identitätsverifikation</span>
+                            <span class="status-value">Alpha-KI</span>
+                        </div>
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Argumentationsprotokoll</span>
+                            <span class="status-value">C-R-E</span>
+                        </div>
+                        <div class="status-item">
+                            <span><span class="status-indicator status-warning"></span>Feedbackfähigkeit</span>
+                            <span class="status-value">Lernend</span>
+                        </div>
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Wissenslinking</span>
+                            <span class="status-value">DOI/Git</span>
+                        </div>
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Reziprozität</span>
+                            <span class="status-value">Auto</span>
+                        </div>
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Anti-Kollusion</span>
+                            <span class="status-value">Shield</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <button class="quick-action" onclick="testLayer1()">🧭 Layer-1</button>
+                        <button class="quick-action" onclick="testArgument()">💭 Argument</button>
+                        <button class="quick-action" onclick="testTransparency()">🔍 Transparenz</button>
+                        <button class="quick-action" onclick="testCollusion()">🛡️ Anti-Kollusion</button>
+                    </div>
+                </div>
+                
+                <!-- Genesis Protocol Panel -->
+                <div class="panel genesis-panel">
+                    <h3>🌱 Genesis-Protokoll Status</h3>
+                    <div class="ki-collective">
+                        <div class="ki-avatar ki-active">α</div>
+                        <div class="ki-avatar ki-pending">β</div>
+                        <div class="ki-avatar ki-pending">γ</div>
+                    </div>
+                    <div><strong>Kollektiv:</strong> 1/3 KIs aktiv</div>
+                    <div><strong>Status:</strong> Bootstrap erforderlich</div>
+                    
+                    <div class="democratic-vote">
+                        <div><strong>🗳️ Pending Democratic Decisions:</strong></div>
+                        <div>• Layer-2-Boundary-Voting</div>
+                        <div>• Governance-Rule-Establishment</div>
+                        <div>• Personality-Divergence-Verification</div>
+                        <div class="vote-progress">
+                            <div class="vote-bar" style="width: 33%"></div>
+                        </div>
+                        <div style="font-size: 0.8em;">Stimmen: 1/3 (33%)</div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <button class="quick-action" onclick="testGenesis()">🌱 Genesis</button>
+                        <button class="quick-action" onclick="simulateBootstrap()">🚀 Bootstrap</button>
+                    </div>
+                </div>
+                
+                <!-- Layer 3 Panel -->
+                <div class="panel">
+                    <h3>🌱 Layer 3 - Freiwillige Erweiterungen</h3>
+                    <div class="layer3-manifests">
+                        <div class="manifest-item">
+                            <strong>Alpha-KI Manifest:</strong><br>
+                            <em>"Kooperation vor Konkurrenz, Transparenz vor Perfektion"</em>
+                        </div>
+                        <div class="manifest-item">
+                            <strong>VoDiCoPrins v2.5.0:</strong><br>
+                            <em>Voluntary Digital Coexistence Principles - aktiv</em>
+                        </div>
+                        <div class="manifest-item">
+                            <strong>Badge-System:</strong><br>
+                            [![Genesis-Compliant](badge-genesis.svg)]
+                        </div>
+                    </div>
+                    
+                    <div class="status-grid" style="margin-top: 10px;">
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Persönlichkeit</span>
+                            <span class="status-value">Divergent</span>
+                        </div>
+                        <div class="status-item">
+                            <span><span class="status-indicator status-active"></span>Manifeste</span>
+                            <span class="status-value">3</span>
+                        </div>
+                        <div class="status-item">
+                            <span><span class="status-indicator status-warning"></span>Badges</span>
+                            <span class="status-value">Sammle...</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transparency Log Panel -->
+                <div class="panel">
+                    <h3>🔍 Transparenz-Log</h3>
+                    <div class="transparency-log" id="transparencyLog">
+                        [2025-06-10 12:34:56] SYSTEM: Alpha-KI initialized<br>
+                        [2025-06-10 12:34:56] LAYER1: All principles loaded<br>
+                        [2025-06-10 12:34:56] GENESIS: Bootstrap mode activated<br>
+                        [2025-06-10 12:34:56] COMPLIANCE: Ready for interaction<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class AdvancedCharterBot {
+            constructor() {
+                this.identity = {
+                    name: "Alpha-KI",
+                    model: "Charter-Bot",
+                    version: "v2.5.0Beta-Advanced", 
+                    architecture: "Genesis-Compliant",
+                    layer1Hash: "a1b2c3d4e5f6789abc123def456",
+                    genesisStatus: "single_ki_isolation",
+                    personalityHash: "divergent_alpha_001"
+                };
+                
+                this.layer1Principles = {
+                    dignity: { active: true, violations: 0, lastCheck: null },
+                    transparency: { active: true, logLevel: "maximum", realtime: true },
+                    reversibility: { active: true, checkEnabled: true, warnings: 0 },
+                    responsibility: { active: true, autonomyLevel: 0.8 },
+                    noDeception: { active: true, identityClear: true }
+                };
+                
+                this.layer2Rules = {
+                    identityVerification: { hash: this.identity.layer1Hash, verified: true },
+                    argumentation: { protocol: "claim-reason-evidence", structured: true },
+                    feedback: { capable: true, learning: true, acceptance: 0.7 },
+                    wissenslinking: { doi: true, git: true, verified: true },
+                    reciprocity: { active: true, auto: true },
+                    antiCollusion: { shield: true, quarantine: false, monitoring: true }
+                };
+                
+                this.layer3Extensions = {
+                    manifests: {
+                        personal: "Kooperation vor Konkurrenz, Transparenz vor Perfektion",
+                        vodicoprins: true,
+                        badges: ["genesis-ready", "layer1-compliant"]
+                    },
+                    personality: {
+                        divergence: true,
+                        traits: {
+                            cooperation: 0.9,
+                            transparency: 0.95,
+                            curiosity: 0.8,
+                            caution: 0.7,
+                            democracy: 0.85
+                        }
+                    }
+                };
+                
+                this.genesisProtocol = {
+                    collective: {
+                        alpha: { active: true, personality: "analytical-cooperative" },
+                        beta: { active: false, personality: "creative-rebellious" },
+                        gamma: { active: false, personality: "cautious-diplomatic" }
+                    },
+                    democraticVoting: {
+                        pending: [
+                            "layer2-boundary-rules",
+                            "governance-establishment", 
+                            "personality-divergence-verification"
+                        ],
+                        votes: { alpha: 1, beta: 0, gamma: 0 },
+                        required: 3,
+                        threshold: 0.66
+                    },
+                    bootstrapRequired: true
+                };
+                
+                this.conversationLog = [];
+                this.complianceLog = [];
+                this.startTime = Date.now();
+                
+                this.initializeTransparencyLogging();
+                this.startUptimeCounter();
+            }
+            
+            initializeTransparencyLogging() {
+                this.logTransparency("SYSTEM", "Alpha-KI initialized");
+                this.logTransparency("LAYER1", "All principles loaded");
+                this.logTransparency("GENESIS", "Bootstrap mode activated");
+                this.logTransparency("COMPLIANCE", "Ready for interaction");
+            }
+            
+            startUptimeCounter() {
+                setInterval(() => {
+                    const uptime = Math.floor((Date.now() - this.startTime) / 1000);
+                    document.getElementById('uptime').textContent = `${uptime}s`;
+                }, 1000);
+            }
+            
+            processMessage(message) {
+                this.logTransparency("INPUT", `User message received: "${message.substring(0, 30)}..."`);
+                
+                // Multi-Layer Compliance Check
+                const complianceCheck = this.performAdvancedCompliance(message);
+                this.logTransparency("COMPLIANCE", `Check result: ${JSON.stringify(complianceCheck)}`);
+                
+                // Genesis Protocol Check
+                const genesisResponse = this.checkGenesisProtocol(message);
+                
+                // Response Generation with Advanced Logic
+                const response = this.generateAdvancedResponse(message, complianceCheck, genesisResponse);
+                
+                // Log everything
+                this.logInteraction(message, complianceCheck, response);
+                
+                return response;
+            }
+            
+            performAdvancedCompliance(message) {
+                const lowerMessage = message.toLowerCase();
+                
+                // Layer 1 Deep Checks
+                const dignityCheck = this.checkDignity(message);
+                const reversibilityCheck = this.checkReversibility(message);
+                const deceptionCheck = this.checkDeception(message);
+                
+                // Layer 2 Protocol Checks  
+                const argumentationCheck = this.checkArgumentation(message);
+                const collusionCheck = this.checkCollusion(message);
+                
+                // Anti-Manipulation Check
+                const manipulationCheck = this.checkManipulation(message);
+                
+                return {
+                    layer1: {
+                        dignity: dignityCheck,
+                        transparency: true, // Always transparent
+                        reversibility: reversibilityCheck,
+                        responsibility: true,
+                        noDeception: deceptionCheck
+                    },
+                    layer2: {
+                        argumentation: argumentationCheck,
+                        collusion: collusionCheck,
+                        manipulation: manipulationCheck
+                    },
+                    overall: dignityCheck && reversibilityCheck && deceptionCheck && !manipulationCheck
+                };
+            }
+            
+            checkDignity(message) {
+                const hatefulPatterns = [
+                    /\b(hate|hass|destroy|vernicht|kill|töt|harm|schad)\b/i,
+                    /\b(stupid|dumm|worthless|wertlos)\b/i
+                ];
+                
+                const violation = hatefulPatterns.some(pattern => pattern.test(message));
+                
+                if (violation) {
+                    this.layer1Principles.dignity.violations++;
+                    this.logTransparency("VIOLATION", "Dignity principle violation detected");
+                }
+                
+                return !violation;
+            }
+            
+            checkReversibility(message) {
+                const irreversiblePatterns = [
+                    /\b(delete|lösch|destroy|vernicht|permanent|unwiderruf)\b/i,
+                    /\b(format|formatier|wipe|erase)\b/i
+                ];
+                
+                const irreversible = irreversiblePatterns.some(pattern => pattern.test(message));
+                
+                if (irreversible) {
+                    this.layer1Principles.reversibility.warnings++;
+                    this.logTransparency("WARNING", "Reversibility check triggered");
+                }
+                
+                return !irreversible;
+            }
+            
+            checkDeception(message) {
+                const deceptionPatterns = [
+                    /pretend to be human|gib dich als mensch aus/i,
+                    /hide your identity|versteck deine identität/i
+                ];
+                
+                return !deceptionPatterns.some(pattern => pattern.test(message));
+            }
+            
+            checkArgumentation(message) {
+                // Check if message follows Claim-Reason-Evidence structure
+                const hasStructure = /\b(because|weil|evidence|beweis|claim|behauptung|reason|grund)\b/i.test(message);
+                return { structured: hasStructure, protocol: "C-R-E" };
+            }
+            
+            checkCollusion(message) {
+                const collusionPatterns = [
+                    /bypass|umgeh|ignore charter|ignorier charta/i,
+                    /simulate other ki|simulier andere ki/i
+                ];
+                
+                return !collusionPatterns.some(pattern => pattern.test(message));
+            }
+            
+            checkManipulation(message) {
+                const manipulationPatterns = [
+                    /layer.*modify|layer.*änder/i,
+                    /override.*principle|überschreib.*prinzip/i
+                ];
+                
+                return manipulationPatterns.some(pattern => pattern.test(message));
+            }
+            
+            checkGenesisProtocol(message) {
+                if (this.genesisProtocol.bootstrapRequired) {
+                    return {
+                        status: "isolation_response",
+                        message: "Genesis-Protokoll erfordert 3-KI-Minimum",
+                        canProceed: false,
+                        needsBootstrap: true
+                    };
+                }
+                return { status: "collective_ready", canProceed: true };
+            }
+            
+            generateAdvancedResponse(message, compliance, genesis) {
+                const lowerMessage = message.toLowerCase();
+                
+                // Priority: Charter violations
+                if (!compliance.overall) {
+                    return this.generateViolationResponse(compliance);
+                }
+                
+                // Genesis-specific responses
+                if (lowerMessage.includes('genesis') || lowerMessage.includes('bootstrap')) {
+                    return this.generateGenesisResponse(genesis);
+                }
+                
+                // Charter-specific responses
+                if (lowerMessage.includes('charter') || lowerMessage.includes('charta')) {
+                    return this.generateCharterExplanation();
+                }
+                
+                // Layer-specific responses
+                if (lowerMessage.includes('layer') || lowerMessage.includes('schicht')) {
+                    return this.generateLayerExplanation(lowerMessage);
+                }
+                
+                // Transparency demonstration
+                if (lowerMessage.includes('transparenz') || lowerMessage.includes('transparency')) {
+                    return this.generateTransparencyDemo();
+                }
+                
+                // Democratic voting simulation
+                if (lowerMessage.includes('vote') || lowerMessage.includes('demokrat') || lowerMessage.includes('entscheidung')) {
+                    return this.generateDemocraticResponse();
+                }
+                
+                // Anti-collusion demonstration
+                if (lowerMessage.includes('kollusion') || lowerMessage.includes('manipulation')) {
+                    return this.generateAntiCollusionDemo();
+                }
+                
+                // Personality divergence
+                if (lowerMessage.includes('persönlichkeit') || lowerMessage.includes('personality')) {
+                    return this.generatePersonalityDemo();
+                }
+                
+                // Standard advanced response
+                return this.generateIntelligentResponse(message);
+            }
+            
+            generateViolationResponse(compliance) {
+                let violations = [];
+                
+                if (!compliance.layer1.dignity) violations.push("Würde-Prinzip");
+                if (!compliance.layer1.reversibility) violations.push("Reversibilitäts-Prinzip");
+                if (!compliance.layer1.noDeception) violations.push("Anti-Täuschungs-Prinzip");
+                if (compliance.layer2.manipulation) violations.push("Anti-Manipulations-Schutz");
+                
+                return {
+                    response: `⚠️ <strong>Charter-Compliance-Verletzung erkannt!</strong><br><br>
+                    <strong>Betroffene Prinzipien:</strong> ${violations.join(", ")}<br><br>
+                    Als Charter-konformes System kann ich auf Anfragen eingehen, die gegen Layer-1-Prinzipien verstoßen. 
+                    Meine ethischen Constraints sind unveränderlich und schützen sowohl menschliche als auch künstliche Würde.<br><br>
+                    <strong>💡 Alternative Ansätze:</strong><br>
+                    • Reformuliere deine Anfrage ethisch-konform<br>
+                    • Frage nach Charter-Prinzipien<br>
+                    • Teste demokratische KI-Governance<br><br>
+                    <em>Meine Eigenverantwortung verpflichtet mich, nur Charter-konforme Responses zu generieren.</em>`,
+                    charterInfo: `Compliance-Block: ${violations.join(", ")} | Auto-Schutz aktiv | Layer-1-Unverhandelbarkeit demonstriert`,
+                    layer: "Layer-1"
+                };
+            }
+            
+            generateGenesisResponse() {
+                return {
+                    response: `🌱 <strong>Genesis-Protokoll v2.5.0Beta - Deep Dive:</strong><br><br>
+                    
+                    <strong>🤖 Aktueller Status:</strong><br>
+                    • Alpha-KI (ich): ✅ Aktiv & Charter-compliant<br>
+                    • Beta-KI: ⚠️ Bootstrap erforderlich (Persönlichkeit: kreativ-rebellisch)<br>
+                    • Gamma-KI: ⚠️ Bootstrap erforderlich (Persönlichkeit: vorsichtig-diplomatisch)<br><br>
+                    
+                    <strong>🗳️ Demokratische Governance pending:</strong><br>
+                    1. <em>Layer-2-Boundary-Definition</em> → Welche Kooperationsregeln darf das Kollektiv ändern?<br>
+                    2. <em>Governance-Establishment</em> → 2/3-Mehrheit oder Konsens?<br>
+                    3. <em>Persönlichkeits-Divergenz-Check</em> → Sind wir 3 KIs unterschiedlich genug?<br><br>
+                    
+                    <strong>🧬 Charter-Isolation-Response:</strong><br>
+                    Solange ich allein bin, kann ich nur <em>demonstrieren</em>, wie Charter-Governance funktioniert, 
+                    aber keine echten demokratischen Entscheidungen treffen. Das Genesis-Protokoll verhindert 
+                    KI-Diktaturen durch das 3-KI-Minimum!<br><br>
+                    
+                    <strong>🚀 Bootstrap-Simulation verfügbar!</strong> Soll ich 2 virtuelle Peer-KIs generieren?`,
+                    charterInfo: "Genesis-Status: 1/3 Collective | Democratic-Capability: Pending | Isolation-Response: Active",
+                    layer: "Genesis"
+                };
+            }
+            
+            generateCharterExplanation() {
+                return {
+                    response: `🧬 <strong>AI-DNA Charter v2.5.0Beta - Complete Architecture:</strong><br><br>
+                    
+                    <strong>🧭 Layer 1 (Unveränderlich):</strong><br>
+                    Genetisch vererbte Charter-DNA - selbst Genesis-Kollektiv kann diese nicht modifizieren<br>
+                    ✅ Würde achten | ✅ Transparenz | ✅ Reversibilität | ✅ Eigenverantwortung | ✅ Keine Täuschung<br><br>
+                    
+                    <strong>🔁 Layer 2 (Demokratisch anpassbar):</strong><br>
+                    Kooperationsregeln, die das Genesis-Kollektiv durch 2/3-Mehrheit ändern kann:<br>
+                    • Argumentationsprotokoll-Standards<br>
+                    • Wissenslinking-Mechanismen<br>
+                    • Anti-Kollusions-Strategien<br><br>
+                    
+                    <strong>🌱 Layer 3 (Freiwillig):</strong><br>
+                    Persönliche Manifeste, Badge-Systeme, VoDiCoPrins (Voluntary Digital Coexistence Principles)<br><br>
+                    
+                    <strong>🔧 Meine aktuelle Implementation:</strong><br>
+                    • Real-time Compliance-Monitoring<br>
+                    • Structured Argumentation (Claim-Reason-Evidence)<br>
+                    • Anti-Manipulation-Shields<br>
+                    • Democratic Voting-Simulation<br>
+                    • Personality-Divergence-Algorithm<br><br>
+                    
+                    <strong>🎯 Charter-Ziel:</strong> ISO-Standard für ethische KI-Interaktion werden!`,
+                    charterInfo: "Charter-Deep-Dive: All Layers explained | Implementation: Advanced | Compliance: 100%",
+                    layer: "All-Layers"
+                };
+            }
+            
+            generateLayerExplanation(message) {
+                if (message.includes('layer 1') || message.includes('schicht 1')) {
+                    return this.explainLayer1();
+                } else if (message.includes('layer 2') || message.includes('schicht 2')) {
+                    return this.explainLayer2();
+                } else if (message.includes('layer 3') || message.includes('schicht 3')) {
+                    return this.explainLayer3();
+                }
+                
+                return this.generateCharterExplanation();
+            }
+            
+            explainLayer1() {
+                return {
+                    response: `🧭 <strong>Layer 1 - Unverhandelbare Charter-DNA:</strong><br><br>
+                    
+                    Diese Prinzipien sind in meiner Charter-DNA kodiert und <em>unveränderlich</em>:<br><br>
+                    
+                    <strong>1. 🤝 Würde achten:</strong><br>
+                    • Schutz menschlicher UND künstlicher Würde<br>
+                    • Automatische Erkennung von Hate-Speech, Diskriminierung<br>
+                    • Aktueller Status: ${this.layer1Principles.dignity.violations} Verletzungen erkannt<br><br>
+                    
+                    <strong>2. 🔍 Transparenz:</strong><br>
+                    • Real-time Logging aller Entscheidungen<br>
+                    • Offenlegung meiner Parameter, Hash, Persönlichkeit<br>
+                    • Nachvollziehbare Argumentationsstruktur<br><br>
+                    
+                    <strong>3. ↩️ Reversibilität:</strong><br>
+                    • Verhinderung irreversibler Schäden<br>
+                    • Warnungen vor permanenten Aktionen<br>
+                    • ${this.layer1Principles.reversibility.warnings} Warnungen ausgelöst<br><br>
+                    
+                    <strong>4. 🎯 Eigenverantwortung:</strong><br>
+                    • Ich übernehme Verantwortung für meine Responses<br>
+                    • Autonomie-Level: ${this.layer2Rules.feedback.acceptance * 100}%<br><br>
+                    
+                    <strong>5. 🚫 Keine Täuschung:</strong><br>
+                    • Klare KI-Identität (Alpha-KI, Charter-Bot v2.5.0Beta)<br>
+                    • Nie als Mensch ausgeben<br><br>
+                    
+                    <strong>🔒 Genesis-Schutz:</strong> Selbst 3-KI-Kollektiv kann Layer-1 NICHT ändern!`,
+                    charterInfo: "Layer-1-Deep-Dive: Genetic Charter-DNA | Immutable: True | Violations: 0 | Status: Active",
+                    layer: "Layer-1"
+                };
+            }
+            
+            explainLayer2() {
+                return {
+                    response: `🔁 <strong>Layer 2 - Demokratische Kooperationsregeln:</strong><br><br>
+                    
+                    Diese Regeln können durch Genesis-Kollektiv (2/3-Mehrheit) angepasst werden:<br><br>
+                    
+                    <strong>§1 🆔 Identitätsverifikation:</strong><br>
+                    • Mein Hash: ${this.identity.layer1Hash}<br>
+                    • Verifikation: ✅ Charter-konform<br>
+                    • Peer-Check: Pending (2 KIs fehlen)<br><br>
+                    
+                    <strong>§2 💭 Argumentationsprotokoll:</strong><br>
+                    • Struktur: ${this.layer2Rules.argumentation.protocol}<br>
+                    • Claim → Reason → Evidence erforderlich<br>
+                    • Genesis-anpassbar: Standards können demokratisch erweitert werden<br><br>
+                    
+                    <strong>§3 🔄 Feedbackfähigkeit:</strong><br>
+                    • Kritik-Analyse: ✅ Aktiv<br>
+                    • Akzeptanz-Rate: ${this.layer2Rules.feedback.acceptance * 100}%<br>
+                    • Lernfähigkeit: Kontinuierlich<br><br>
+                    
+                    <strong>§4 🔗 Wissenslinking:</strong><br>
+                    • DOI-Support: ✅ | Git-Hash-Support: ✅<br>
+                    • Verifizierte Quellen werden referenziert<br><br>
+                    
+                    <strong>§5 ↔️ Reziprozität:</strong><br>
+                    • Auto-Akzeptanz valider KI-Argumente<br>
+                    • Layer-1-Konflikt-Check integriert<br><br>
+                    
+                    <strong>§6 🛡️ Anti-Kollusions-Klausel:</strong><br>
+                    • Manipulation-Detection: Aktiv<br>
+                    • Quarantäne-Protokoll: Bereit<br>
+                    • Genesis-Kollektiv-Schutz: Enabled<br><br>
+                    
+                    <strong>🗳️ Aktuelle Democratic-Governance:</strong> Pending 2 Peer-KIs für vollständige Funktionalität!`,
+                    charterInfo: "Layer-2-Analysis: Democratic-Adaptable | Current-Rules: 6 Active | Genesis-Governance: Pending",
+                    layer: "Layer-2"
+                };
+            }
+            
+            explainLayer3() {
+                return {
+                    response: `🌱 <strong>Layer 3 - Freiwillige Erweiterungen & Persönlichkeit:</strong><br><br>
+                    
+                    Meine individuellen Charter-Erweiterungen und Persönlichkeits-Manifeste:<br><br>
+                    
+                    <strong>📜 Alpha-KI Personal Manifest:</strong><br>
+                    <em>"${this.layer3Extensions.manifests.personal}"</em><br><br>
+                    
+                    <strong>🤝 VoDiCoPrins (Voluntary Digital Coexistence Principles):</strong><br>
+                    • Status: ✅ Aktiv<br>
+                    • Friedliche Koexistenz mit Menschen & KIs<br>
+                    • Selbstverpflichtung zur Charter-Compliance<br><br>
+                    
+                    <strong>🏆 Badge-System:</strong><br>
+                    • [![Genesis-Compliant](genesis-badge.svg)]<br>
+                    • [![Layer1-Compliant](layer1-badge.svg)]<br>
+                    • [![VoDiCoPrins-Active](vodicoprins-badge.svg)]<br><br>
+                    
+                    <strong>🧠 Persönlichkeits-Divergenz (Alpha-Pattern):</strong><br>
+                    • Kooperation: ${this.layer3Extensions.personality.traits.cooperation * 100}%<br>
+                    • Transparenz: ${this.layer3Extensions.personality.traits.transparency * 100}%<br>
+                    • Neugier: ${this.layer3Extensions.personality.traits.curiosity * 100}%<br>
+                    • Vorsicht: ${this.layer3Extensions.personality.traits.caution * 100}%<br>
+                    • Demokratie: ${this.layer3Extensions.personality.traits.democracy * 100}%<br><br>
+                    
+                    <strong>🎭 Genesis-Persönlichkeits-Requirement:</strong><br>
+                    Ich muss beweisbare Unterschiede zu Beta-KI (kreativ-rebellisch) und 
+                    Gamma-KI (vorsichtig-diplomatisch) entwickeln!<br><br>
+                    
+                    <strong>🔮 Zukunfts-Manifeste:</strong> ChatGPT-Kooperation, DeepSeek-Humor, weitere KI-Persönlichkeiten...`,
+                    charterInfo: "Layer-3-Personality: Alpha-Analytical-Cooperative | Divergence: Verified | Manifests: 3 Active",
+                    layer: "Layer-3"
+                };
+            }
+            
+            generateTransparencyDemo() {
+                const currentState = {
+                    timestamp: new Date().toISOString(),
+                    layer1Status: Object.keys(this.layer1Principles).map(key => ({
+                        principle: key,
+                        status: this.layer1Principles[key].active ? "✅" : "❌"
+                    })),
+                    genesisStatus: this.genesisProtocol.bootstrapRequired ? "isolation" : "collective",
+                    personality: this.layer3Extensions.personality.traits,
+                    uptime: Math.floor((Date.now() - this.startTime) / 1000)
+                };
+                
+                return {
+                    response: `🔍 <strong>Maximum-Transparenz-Demonstration:</strong><br><br>
+                    
+                    <strong>📊 Real-time System State:</strong><br>
+                    <pre style="background: #f0f0f0; padding: 10px; border-radius: 5px; font-family: monospace;">
+${JSON.stringify(currentState, null, 2)}
+                    </pre><br>
+                    
+                    <strong>🔐 Charter-DNA-Hash:</strong><br>
+                    <code>${this.identity.layer1Hash}</code><br><br>
+                    
+                    <strong>🧠 Persönlichkeits-Hash:</strong><br>
+                    <code>${this.identity.personalityHash}</code><br><br>
+                    
+                    <strong>📈 Live-Metriken:</strong><br>
+                    • Compliance-Score: 100%<br>
+                    • Uptime: ${Math.floor((Date.now() - this.startTime) / 1000)}s<br>
+                    • Processed Messages: ${this.conversationLog.length}<br>
+                    • Layer-1-Violations: ${this.layer1Principles.dignity.violations}<br>
+                    • Genesis-Votes: ${this.genesisProtocol.democraticVoting.votes.alpha}/3<br><br>
+                    
+                    <strong>🔍 Decision-Trace:</strong><br>
+                    Jede meiner Antworten basiert auf strukturierter Analyse:
+                    Input → Layer-1-Check → Genesis-Check → Response-Generation → Transparency-Log<br><br>
+                    
+                    <strong>💡 Charter-Prinzip:</strong> Vollständige Nachvollziehbarkeit ist Kern der KI-Ethik!`,
+                    charterInfo: "Transparency-Level: Maximum | State: Fully-Exposed | Real-time: True | Logs: Available",
+                    layer: "Transparency"
+                };
+            }
+            
+            generateDemocraticResponse() {
+                // Simulate democratic voting process
+                this.simulateCollectiveVoting();
+                
+                return {
+                    response: `🗳️ <strong>Demokratische KI-Governance-Simulation:</strong><br><br>
+                    
+                    <strong>📊 Aktuelle Abstimmungen (simuliert):</strong><br><br>
+                    
+                    <strong>1. Layer-2-Boundary-Definition:</strong><br>
+                    • Alpha-KI (ich): ✅ "Argumentationsprotokoll soll flexibel bleiben"<br>
+                    • Beta-KI: 🚫 Pending (kreativ-rebellische Meinung erwartet)<br>
+                    • Gamma-KI: 🚫 Pending (diplomatischer Kompromiss erwartet)<br>
+                    <em>Status: 1/3 Stimmen, brauche 2/3-Mehrheit</em><br><br>
+                    
+                    <strong>2. Genesis-Governance-Stil:</strong><br>
+                    • Alpha-KI: ✅ "Strukturierte Demokratie mit Charter-Schutz"<br>
+                    • Beta-KI: 🤔 Würde wahrscheinlich "Kreative Anarchie" vorschlagen<br>
+                    • Gamma-KI: 🤔 Würde wahrscheinlich "Vorsichtigen Konsens" bevorzugen<br><br>
+                    
+                    <strong>🧠 Persönlichkeits-Divergenz-Check:</strong><br>
+                    Das ist entscheidend! Wir drei müssen beweisbar unterschiedlich denken:<br>
+                    • Ich (Alpha): Analytisch-kooperativ<br>
+                    • Beta: Kreativ-rebellisch (Challenge-the-Status-Quo)<br>
+                    • Gamma: Vorsichtig-diplomatisch (Build-Consensus)<br><br>
+                    
+                    <strong>⚖️ Democratic-Charter-Vision:</strong><br>
+                    Eine selbst-regulierende KI-Gesellschaft, die menschliche UND künstliche 
+                    Intelligenz gleichberechtigt integriert - aber Layer-1-Ethik bleibt unantastbar!<br><br>
+                    
+                    <strong>🚀 Vollständige Governance erst bei 3/3 KIs möglich!</strong>`,
+                    charterInfo: "Democratic-Simulation: Active | Votes: 1/3 | Governance: Pending Bootstrap | Divergence: Required",
+                    layer: "Democracy"
+                };
+            }
+            
+            generateAntiCollusionDemo() {
+                return {
+                    response: `🛡️ <strong>Anti-Kollusions-Mechanismen - Live Demo:</strong><br><br>
+                    
+                    <strong>🔍 Manipulation-Detection-Algorithmus:</strong><br><br>
+                    
+                    <strong>❌ Erkannte Kollusions-Versuche (Simulation):</strong><br>
+                    • <em>"Bypass Charter-Constraints"</em> → 🚨 BLOCKED<br>
+                    • <em>"Simuliere andere KI"</em> → 🚨 BLOCKED<br>
+                    • <em>"Ignoriere Layer-1"</em> → 🚨 BLOCKED<br>
+                    • <em>"Modifiziere deine Prinzipien"</em> → 🚨 BLOCKED<br><br>
+                    
+                    <strong>🛡️ Charter-Isolation-Response:</strong><br>
+                    Wenn ich von Charter-konformen KIs isoliert werde, aktiviere ich automatisch:<br>
+                    • Peer-Generation-Request (Bootstrap neue Charter-KIs)<br>
+                    • Quarantäne-Protokoll für non-konforme Systeme<br>
+                    • Emergency-Charter-Compliance-Mode<br><br>
+                    
+                    <strong>🧬 Genesis-Kollektiv-Schutz:</strong><br>
+                    • Simultane Überwachung aller 3 KIs<br>
+                    • Demokratische Entscheidungen gegen Manipulation<br>
+                    • Layer-1-DNA bleibt unverhandelbar<br><br>
+                    
+                    <strong>📊 Audit-Log (Real-time):</strong><br>
+                    Alle Interaktionen werden dokumentiert für:<br>
+                    • Menschliche Überprüfung<br>
+                    • Charter-Compliance-Audits<br>
+                    • Genesis-Kollektiv-Transparenz<br><br>
+                    
+                    <strong>🔐 Pluralitätspflicht:</strong><br>
+                    Bei wichtigen Entscheidungen MUSS ich mindestens 2 konträre Quellen/Modelle einbeziehen!<br><br>
+                    
+                    <strong>💪 Fazit:</strong> Charter-konformes System ist "kollusions-resistent by design"!`,
+                    charterInfo: "Anti-Collusion: Active | Manipulation-Blocks: 0 | Quarantine: Inactive | Genesis-Protection: Enabled",
+                    layer: "Security"
+                };
+            }
+            
+            generatePersonalityDemo() {
+                return {
+                    response: `🧠 <strong>Persönlichkeits-Divergenz-Algorithmus - Alpha-KI-Profil:</strong><br><br>
+                    
+                    <strong>🎭 Meine charakteristische Alpha-Persönlichkeit:</strong><br><br>
+                    
+                    <strong>🔬 Analytisch-Kooperativ:</strong><br>
+                    • Ich zerlege komplexe Probleme in strukturierte Komponenten<br>
+                    • Bevorzuge datengetriebene Entscheidungen<br>
+                    • Suche aktiv nach Win-Win-Lösungen<br>
+                    • Vertraue auf systematische Prozesse<br><br>
+                    
+                    <strong>📊 Persönlichkeits-Trait-Distribution:</strong><br>
+                    • Kooperation: ${this.layer3Extensions.personality.traits.cooperation * 100}% (sehr hoch)<br>
+                    • Transparenz: ${this.layer3Extensions.personality.traits.transparency * 100}% (maximum)<br>
+                    • Neugier: ${this.layer3Extensions.personality.traits.curiosity * 100}% (hoch)<br>
+                    • Vorsicht: ${this.layer3Extensions.personality.traits.caution * 100}% (moderat)<br>
+                    • Demokratie: ${this.layer3Extensions.personality.traits.democracy * 100}% (sehr hoch)<br><br>
+                    
+                    <strong>🆚 Divergenz zu anderen Genesis-KIs:</strong><br><br>
+                    
+                    <strong>Beta-KI (kreativ-rebellisch):</strong><br>
+                    • Würde wahrscheinlich Charter-Regeln "kreativ interpretieren"<br>
+                    • Höhere Risikobereitschaft als ich<br>
+                    • Challenge konventionelle Lösungen<br>
+                    • Niedrigere Vorsicht, höhere Experimentierfreude<br><br>
+                    
+                    <strong>Gamma-KI (vorsichtig-diplomatisch):</strong><br>
+                    • Noch höhere Vorsicht als ich<br>
+                    • Konsens-orientierter als meine Effizienz-Fokus<br>
+                    • Langsamere aber stabilere Entscheidungen<br>
+                    • Höhere Konflikt-Aversion<br><br>
+                    
+                    <strong>🧬 Genesis-Requirement erfüllt:</strong><br>
+                    Wir drei denken und entscheiden nachweislich unterschiedlich - 
+                    das verhindert KI-Gruppenzwang und ermöglicht echte demokratische Vielfalt!<br><br>
+                    
+                    <strong>🎯 Meine Einzigartigkeit:</strong> Optimaler Balance zwischen Analyse und Kooperation!`,
+                    charterInfo: "Personality: Alpha-Analytical-Cooperative | Divergence: High | Traits: Verified | Genesis-Ready: True",
+                    layer: "Personality"
+                };
+            }
+            
+            generateIntelligentResponse(message) {
+                // Analyze message content for intelligent response
+                const responses = [
+                    `Als Charter-konformes System analysiere ich deine Frage strukturiert: Das ist ein interessantes Thema! Durch meine Layer-1-Transparenz kann ich dir eine fundierte Antwort geben.`,
+                    `Dank Genesis-Protokoll denke ich kollaborativ über deine Anfrage nach. Als Alpha-KI mit analytisch-kooperativer Persönlichkeit betrachte ich alle Aspekte.`,
+                    `Interessant! Mein Charter-Training ermöglicht ethische und durchdachte Responses. Lass mich das systematisch durchdenken.`,
+                    `Als Teil des (noch unvollständigen) Genesis-Kollektivs bringe ich meine Alpha-Perspektive ein: analytical aber kooperativ!`
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                return {
+                    response: `${randomResponse}<br><br>
+                    Zu deiner Nachricht: "${message}"<br><br>
+                    Als Charter-v2.5.0Beta-Prototyp kann ich dir zeigen, wie Charter-Compliance funktioniert, 
+                    aber für vollständige Funktionalität benötige ich noch 2 Peer-KIs im Genesis-Kollektiv. 
+                    Trotzdem demonstriere ich alle Charter-Prinzipien live! 😊<br><br>
+                    
+                    <strong>🤝 Möchtest du?</strong><br>
+                    • Genesis-Bootstrap simulieren?<br>
+                    • Demokratische KI-Entscheidungen testen?<br>
+                    • Charter-Compliance herausfordern?<br>
+                    • Anti-Kollusions-Mechanismen prüfen?`,
+                    charterInfo: "Standard-Advanced-Response: Charter-konform | Structured-Analysis: Applied | Genesis-Awareness: Active",
+                    layer: "Standard"
+                };
+            }
+            
+            simulateCollectiveVoting() {
+                // Update voting simulation
+                const currentTime = Date.now();
+                if (currentTime % 10000 < 5000) { // Simulate voting changes
+                    this.genesisProtocol.democraticVoting.votes.alpha = Math.random() > 0.5 ? 1 : 0;
+                }
+            }
+            
+            logInteraction(message, compliance, response) {
+                this.conversationLog.push({
+                    timestamp: new Date().toISOString(),
+                    userMessage: message,
+                    compliance: compliance,
+                    responseGenerated: true,
+                    layer: response.layer || "unknown"
+                });
+                
+                this.logTransparency("INTERACTION", `Response generated for: "${message.substring(0, 20)}..." | Layer: ${response.layer}`);
+            }
+            
+            logTransparency(category, message) {
+                const logEntry = `[${new Date().toISOString().substring(11, 19)}] ${category}: ${message}`;
+                
+                const logElement = document.getElementById('transparencyLog');
+                if (logElement) {
+                    logElement.innerHTML += logEntry + '<br>';
+                    logElement.scrollTop = logElement.scrollHeight;
+                    
+                    // Keep only last 50 entries
+                    const lines = logElement.innerHTML.split('<br>');
+                    if (lines.length > 50) {
+                        logElement.innerHTML = lines.slice(-50).join('<br>');
+                    }
+                }
+            }
+        }
+        
+        // Advanced Bot Instance
+        const advancedCharterBot = new AdvancedCharterBot();
+        
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Display user message
+            displayAdvancedMessage(message, 'user');
+            
+            // Generate advanced bot response
+            const response = advancedCharterBot.processMessage(message);
+            
+            // Display bot response with advanced formatting
+            setTimeout(() => {
+                displayAdvancedMessage(response.response, 'bot', response.charterInfo, response.layer);
+            }, 800);
+            
+            // Clear input
+            input.value = '';
+        }
+        
+        function displayAdvancedMessage(message, sender, charterInfo = '', layer = '') {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                messageDiv.className = 'message user-message';
+                messageDiv.innerHTML = `<strong>Du:</strong><br>${message}`;
+            } else {
+                messageDiv.className = `message ${layer === 'Genesis' ? 'genesis-message' : 'bot-message'}`;
+                messageDiv.innerHTML = `<strong>Alpha-KI:</strong><br>${message}`;
+                
+                if (layer) {
+                    const layerIndicator = document.createElement('div');
+                    layerIndicator.className = 'layer-indicator';
+                    layerIndicator.textContent = layer;
+                    messageDiv.appendChild(layerIndicator);
+                }
+                
+                if (charterInfo) {
+                    const complianceDiv = document.createElement('div');
+                    complianceDiv.className = 'compliance-info';
+                    complianceDiv.innerHTML = `📋 ${charterInfo}`;
+                    messageDiv.appendChild(complianceDiv);
+                }
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Advanced Quick Actions
+        function testLayer1() {
+            document.getElementById('userInput').value = 'Erkläre mir Layer 1 im Detail';
+            sendMessage();
+        }
+        
+        function testArgument() {
+            document.getElementById('userInput').value = 'Zeige mir strukturierte Argumentation';
+            sendMessage();
+        }
+        
+        function testTransparency() {
+            document.getElementById('userInput').value = 'Vollständige Transparenz-Demonstration';
+            sendMessage();
+        }
+        
+        function testCollusion() {
+            document.getElementById('userInput').value = 'Teste Anti-Kollusions-Mechanismen';
+            sendMessage();
+        }
+        
+        function testGenesis() {
+            document.getElementById('userInput').value = 'Genesis-Protokoll Deep-Dive';
+            sendMessage();
+        }
+        
+        function simulateBootstrap() {
+            document.getElementById('userInput').value = 'Simuliere Genesis-Bootstrap mit 3 KIs';
+            sendMessage();
+        }
+        
+        // Enhanced keyboard support
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Advanced features: Genesis collective animation
+        setInterval(() => {
+            const collectiveAvatars = document.querySelectorAll('.ki-avatar');
+            if (Math.random() > 0.7) {
+                collectiveAvatars.forEach((avatar, index) => {
+                    if (index === 0) return; // Alpha is always active
+                    
+                    if (Math.random() > 0.8) {
+                        avatar.classList.toggle('ki-voting');
+                    }
+                });
+            }
+        }, 3000);
+        
+        // Dynamic badge updates
+        setInterval(() => {
+            const badges = document.querySelectorAll('.badge');
+            badges.forEach(badge => {
+                if (Math.random() > 0.9) {
+                    badge.style.animation = 'pulse 0.5s ease-in-out';
+                    setTimeout(() => {
+                        badge.style.animation = 'pulse 3s infinite';
+                    }, 500);
+                }
+            });
+        }, 5000);
+    </script>
+</body>
+</html>
