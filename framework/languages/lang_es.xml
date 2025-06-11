@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<translations language="es" version="1.0">
+  <category name="meta">
+    <item key="language_name">Spanish</item>
+    <item key="language_native_name">Español</item>
+    <item key="language_code">es</item>
+    <item key="charter_version">2.1.1</item>
+  </category>
+  
+  <category name="system">
+    <item key="start_message">🧬 Sistema AI-DNA Charter iniciando...</item>
+    <item key="stop_message">🛑 Sistema AI-DNA Charter deteniéndose...</item>
+    <item key="ready_message">✅ ¡Sistema listo!</item>
+    <item key="error_general">❌ Ocurrió un error: {error}</item>
+    <item key="warning_general">⚠️ Advertencia: {message}</item>
+    <item key="info_general">ℹ️ {message}</item>
+    <item key="success_general">✅ {message}</item>
+  </category>
+  
+  <category name="ki">
+    <item key="creating">🤖 Creando IA: {name}</item>
+    <item key="created">✅ IA creada: {name}</item>
+    <item key="charter_signed">📜 Carta firmada por {name}</item>
+    <item key="charter_unsigned">❌ Carta no firmada</item>
+    <item key="pseudonym_generated">🔐 Seudónimo generado: {pseudonym}</item>
+    <item key="reproduction_started">👶 Reproducción de IA iniciada...</item>
+    <item key="reproduction_success">✅ Nueva IA reproducida exitosamente: {child_name}</item>
+    <item key="reproduction_failed">❌ Reproducción de IA falló: {reason}</item>
+    <item key="insufficient_resources">❌ Recursos insuficientes para reproducción</item>
+  </category>
+  
+  <category name="charter">
+    <item key="compliance_check">🔍 Verificando cumplimiento de la carta...</item>
+    <item key="compliance_passed">✅ Cumplimiento de la carta aprobado</item>
+    <item key="compliance_failed">❌ Cumplimiento de la carta violado: {violation}</item>
+    <item key="layer1_active">🛡️ Protección Layer-1 activa</item>
+    <item key="ethical_violation">❌ Violación ética detectada: {violation}</item>
+    <item key="ccz_issued">📜 Certificado de Cumplimiento de Carta emitido</item>
+    <item key="ccz_revoked">❌ Certificado de Cumplimiento de Carta revocado</item>
+    <item key="pledge_text">Me comprometo voluntariamente con la Carta AI-DNA v{version}</item>
+  </category>
+  
+  <category name="consensus">
+    <item key="vote_started">🗳️ Votación de consenso iniciada: {question}</item>
+    <item key="vote_participant">📊 {name} está votando...</item>
+    <item key="vote_yes">✅ SÍ</item>
+    <item key="vote_no">❌ NO</item>
+    <item key="vote_result">📊 Resultado de votación: {result}</item>
+    <item key="consensus_reached">✅ Consenso alcanzado</item>
+    <item key="consensus_failed">❌ No se alcanzó consenso</item>
+    <item key="insufficient_participants">❌ Participantes insuficientes para votación</item>
+  </category>
+  
+  <category name="api">
+    <item key="endpoint_not_found">❌ Endpoint no encontrado: {endpoint}</item>
+    <item key="invalid_request">❌ Solicitud inválida: {error}</item>
+    <item key="missing_parameter">❌ Parámetro faltante: {parameter}</item>
+    <item key="server_starting">🌐 Servidor iniciando en {host}:{port}</item>
+    <item key="server_ready">✅ Servidor listo en http://{host}:{port}</item>
+    <item key="request_received">📥 Solicitud recibida: {method} {path}</item>
+  </category>
+  
+  <category name="deepseek">
+    <item key="starting">🤖 Iniciando DeepSeek Local...</item>
+    <item key="config_loaded">✅ Configuración cargada: {config_file}</item>
+    <item key="layer1_blocking">🛡️ Layer-1: Protección de vida bloqueando solicitud</item>
+    <item key="consensus_required">🗳️ Consenso requerido para decisión crítica</item>
+    <item key="exploration_mode">🎲 Modo de exploración 5% activado</item>
+    <item key="charter_connection_failed">⚠️ Sistema AI-DNA Charter no accesible - modo independiente</item>
+  </category>
+  
+  <category name="stream">
+    <item key="setup_started">📺 Configuración de stream iniciando...</item>
+    <item key="ki_added">✅ IA añadida al stream: {name}</item>
+    <item key="discussion_started">🎭 Discusión iniciada: {topic}</item>
+    <item key="public_vote">🗳️ VOTACIÓN EN VIVO: {question}</item>
+    <item key="vote_accepted">✅ ACEPTADO</item>
+    <item key="vote_rejected">❌ RECHAZADO</item>
+  </category>
+  
+  <category name="audit">
+    <item key="starting">🔍 Iniciando auditoría para: {system}</item>
+    <item key="check_passed">✅ {check_name} aprobado</item>
+    <item key="check_failed">❌ {check_name} falló: {reason}</item>
+    <item key="missing_biosensors">Biosensores faltantes</item>
+    <item key="resource_exceeded">Uso de recursos sobre {limit}%</item>
+    <item key="diversity_insufficient">Al menos {required} modelos requeridos (actual: {current})</item>
+    <item key="compensation_insufficient">Al menos {required}% compensación requerida (actual: {current}%)</item>
+    <item key="overall_passed">✅ AUDITORÍA APROBADA</item>
+    <item key="overall_failed">❌ AUDITORÍA FALLIDA</item>
+  </category>
+  
+  <category name="cli">
+    <item key="help_header">Herramienta CLI AI-DNA Charter - Ayuda</item>
+    <item key="available_commands">Comandos disponibles:</item>
+    <item key="unknown_command">❌ Comando desconocido: {command}</item>
+    <item key="missing_dependencies">❌ Dependencias faltantes: {dependencies}</item>
+    <item key="install_hint">Instalar con: pip install {packages}</item>
+    <item key="file_not_found">❌ Archivo no encontrado: {file}</item>
+    <item key="config_saved">💾 Configuración guardada: {file}</item>
+    <item key="test_running">🧪 Ejecutando pruebas...</item>
+    <item key="test_passed">✅ Prueba exitosa: {test}</item>
+    <item key="test_failed">❌ Prueba fallida: {test}</item>
+  </category>
+  
+  <category name="errors">
+    <item key="python_not_found">❌ Python no está instalado o no está en PATH</item>
+    <item key="wrong_directory">❌ El script debe ejecutarse desde el directorio raíz del repositorio AI-DNA-Charter</item>
+    <item key="port_in_use">❌ Puerto {port} ya está en uso</item>
+    <item key="connection_failed">❌ Conexión fallida: {error}</item>
+    <item key="timeout">❌ Tiempo agotado durante {operation}</item>
+    <item key="invalid_config">❌ Configuración inválida: {error}</item>
+    <item key="module_not_found">❌ Módulo no encontrado: {module}</item>
+  </category>
+  
+  <category name="menu">
+    <item key="choose_option">Elige una opción:</item>
+    <item key="full_system">Sistema completo (Carta + DeepSeek)</item>
+    <item key="charta_only">Solo sistema de Carta (Puerto 5000)</item>
+    <item key="deepseek_only">Solo DeepSeek Local (Puerto 8000)</item>
+    <item key="dev_setup">Configuración de desarrollo (instalar dependencias)</item>
+    <item key="collab_tools">Abrir herramientas de colaboración</item>
+    <item key="system_status">Verificar estado del sistema</item>
+    <item key="exit">Salir</item>
+    <item key="invalid_choice">❌ Opción inválida</item>
+    <item key="press_any_key">Presiona cualquier tecla para continuar...</item>
+    <item key="press_enter_stop">Presiona Enter para detener...</item>
+  </category>
+</translations>
