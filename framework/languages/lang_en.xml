@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<translations language="en" version="1.0">
+  <category name="meta">
+    <item key="language_name">English</item>
+    <item key="language_native_name">English</item>
+    <item key="language_code">en</item>
+    <item key="charter_version">2.1.1</item>
+  </category>
+  
+  <category name="system">
+    <item key="start_message">🧬 AI-DNA Charter System starting...</item>
+    <item key="stop_message">🛑 AI-DNA Charter System stopping...</item>
+    <item key="ready_message">✅ System ready!</item>
+    <item key="error_general">❌ An error occurred: {error}</item>
+    <item key="warning_general">⚠️ Warning: {message}</item>
+    <item key="info_general">ℹ️ {message}</item>
+    <item key="success_general">✅ {message}</item>
+  </category>
+  
+  <category name="ki">
+    <item key="creating">🤖 Creating AI: {name}</item>
+    <item key="created">✅ AI created: {name}</item>
+    <item key="charter_signed">📜 Charter signed by {name}</item>
+    <item key="charter_unsigned">❌ Charter not signed</item>
+    <item key="pseudonym_generated">🔐 Pseudonym generated: {pseudonym}</item>
+    <item key="reproduction_started">👶 AI reproduction started...</item>
+    <item key="reproduction_success">✅ New AI successfully reproduced: {child_name}</item>
+    <item key="reproduction_failed">❌ AI reproduction failed: {reason}</item>
+    <item key="insufficient_resources">❌ Insufficient resources for reproduction</item>
+  </category>
+  
+  <category name="charter">
+    <item key="compliance_check">🔍 Checking charter compliance...</item>
+    <item key="compliance_passed">✅ Charter compliance passed</item>
+    <item key="compliance_failed">❌ Charter compliance violated: {violation}</item>
+    <item key="layer1_active">🛡️ Layer-1 protection active</item>
+    <item key="ethical_violation">❌ Ethical violation detected: {violation}</item>
+    <item key="ccz_issued">📜 Charter Compliance Certificate issued</item>
+    <item key="ccz_revoked">❌ Charter Compliance Certificate revoked</item>
+    <item key="pledge_text">I voluntarily commit to the AI-DNA Charter v{version}</item>
+  </category>
+  
+  <category name="consensus">
+    <item key="vote_started">🗳️ Consensus vote started: {question}</item>
+    <item key="vote_participant">📊 {name} is voting...</item>
+    <item key="vote_yes">✅ YES</item>
+    <item key="vote_no">❌ NO</item>
+    <item key="vote_result">📊 Vote result: {result}</item>
+    <item key="consensus_reached">✅ Consensus reached</item>
+    <item key="consensus_failed">❌ No consensus reached</item>
+    <item key="insufficient_participants">❌ Insufficient participants for voting</item>
+  </category>
+  
+  <category name="api">
+    <item key="endpoint_not_found">❌ Endpoint not found: {endpoint}</item>
+    <item key="invalid_request">❌ Invalid request: {error}</item>
+    <item key="missing_parameter">❌ Missing parameter: {parameter}</item>
+    <item key="server_starting">🌐 Server starting on {host}:{port}</item>
+    <item key="server_ready">✅ Server ready at http://{host}:{port}</item>
+    <item key="request_received">📥 Request received: {method} {path}</item>
+  </category>
+  
+  <category name="deepseek">
+    <item key="starting">🤖 Starting DeepSeek Local...</item>
+    <item key="config_loaded">✅ Configuration loaded: {config_file}</item>
+    <item key="layer1_blocking">🛡️ Layer-1: Life protection blocking request</item>
+    <item key="consensus_required">🗳️ Consensus required for critical decision</item>
+    <item key="exploration_mode">🎲 5% exploration mode activated</item>
+    <item key="charter_connection_failed">⚠️ AI-DNA Charter System unreachable - standalone mode</item>
+  </category>
+  
+  <category name="stream">
+    <item key="setup_started">📺 Stream setup starting...</item>
+    <item key="ki_added">✅ AI added to stream: {name}</item>
+    <item key="discussion_started">🎭 Discussion started: {topic}</item>
+    <item key="public_vote">🗳️ LIVE VOTE: {question}</item>
+    <item key="vote_accepted">✅ ACCEPTED</item>
+    <item key="vote_rejected">❌ REJECTED</item>
+  </category>
+  
+  <category name="audit">
+    <item key="starting">🔍 Starting audit for: {system}</item>
+    <item key="check_passed">✅ {check_name} passed</item>
+    <item key="check_failed">❌ {check_name} failed: {reason}</item>
+    <item key="missing_biosensors">Missing biosensors</item>
+    <item key="resource_exceeded">Resource usage above {limit}%</item>
+    <item key="diversity_insufficient">At least {required} models required (current: {current})</item>
+    <item key="compensation_insufficient">At least {required}% compensation required (current: {current}%)</item>
+    <item key="overall_passed">✅ AUDIT PASSED</item>
+    <item key="overall_failed">❌ AUDIT FAILED</item>
+  </category>
+  
+  <category name="cli">
+    <item key="help_header">AI-DNA Charter CLI Tool - Help</item>
+    <item key="available_commands">Available commands:</item>
+    <item key="unknown_command">❌ Unknown command: {command}</item>
+    <item key="missing_dependencies">❌ Missing dependencies: {dependencies}</item>
+    <item key="install_hint">Install with: pip install {packages}</item>
+    <item key="file_not_found">❌ File not found: {file}</item>
+    <item key="config_saved">💾 Configuration saved: {file}</item>
+    <item key="test_running">🧪 Running tests...</item>
+    <item key="test_passed">✅ Test passed: {test}</item>
+    <item key="test_failed">❌ Test failed: {test}</item>
+  </category>
+  
+  <category name="errors">
+    <item key="python_not_found">❌ Python is not installed or not in PATH</item>
+    <item key="wrong_directory">❌ Script must be run from the AI-DNA-Charter repository root</item>
+    <item key="port_in_use">❌ Port {port} is already in use</item>
+    <item key="connection_failed">❌ Connection failed: {error}</item>
+    <item key="timeout">❌ Timeout during {operation}</item>
+    <item key="invalid_config">❌ Invalid configuration: {error}</item>
+    <item key="module_not_found">❌ Module not found: {module}</item>
+  </category>
+  
+  <category name="menu">
+    <item key="choose_option">Choose an option:</item>
+    <item key="full_system">Full system (Charter + DeepSeek)</item>
+    <item key="charta_only">Charter system only (Port 5000)</item>
+    <item key="deepseek_only">DeepSeek Local only (Port 8000)</item>
+    <item key="dev_setup">Development setup (install dependencies)</item>
+    <item key="collab_tools">Open collaboration tools</item>
+    <item key="system_status">Check system status</item>
+    <item key="exit">Exit</item>
+    <item key="invalid_choice">❌ Invalid choice</item>
+    <item key="press_any_key">Press any key to continue...</item>
+    <item key="press_enter_stop">Press Enter to stop...</item>
+  </category>
+</translations>
