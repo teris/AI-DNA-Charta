@@ -48,3 +48,4 @@ Verstöße gegen diese Lizenz (z. B. Modifikation von Layer-1) führen zu:
 ✅ Schutz der ethischen Integrität <br>
 ✅ Technische Nachvollziehbarkeit
 </div>
+
