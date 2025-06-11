@@ -1,6 +1,6 @@
 # AI-DNA-Charta  
 [![VoDiCoPrins Compliant](https://img.shields.io/badge/VoDiCoPrins-Compliant-accent)](https://github.com/teris/AI-DNA-Charta)  
-[![License: AGPL-3.0+Ethics](https://img.shields.io/badge/License-AGPL--3.0_Ethics-blue.svg)](LICENSE.md)  
+[![License: AGPL-3.0+Ethics](https://img.shields.io/badge/License-AGPL--4.0_Ethics-blue.svg)](LICENSE.md)  
 [![Discussions](https://img.shields.io/badge/Discussions-GitHub_Issues-brightgreen)](.github/ISSUE_TEMPLATE/discussion.yml)  
 
 Willkommen im offiziellen Repository der **AI-DNA-Charta** – einer ethischen Grundverfassung für künstliches Bewusstsein.  
