@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<translations language="de" version="1.0">
+  <category name="meta">
+    <item key="language_name">Deutsch</item>
+    <item key="language_native_name">Deutsch</item>
+    <item key="language_code">de</item>
+    <item key="charter_version">2.1.1</item>
+  </category>
+  
+  <category name="system">
+    <item key="start_message">🧬 AI-DNA Charta System wird gestartet...</item>
+    <item key="stop_message">🛑 AI-DNA Charta System wird beendet...</item>
+    <item key="ready_message">✅ System bereit!</item>
+    <item key="error_general">❌ Ein Fehler ist aufgetreten: {error}</item>
+    <item key="warning_general">⚠️ Warnung: {message}</item>
+    <item key="info_general">ℹ️ {message}</item>
+    <item key="success_general">✅ {message}</item>
+  </category>
+  
+  <category name="ki">
+    <item key="creating">🤖 Erstelle KI: {name}</item>
+    <item key="created">✅ KI erstellt: {name}</item>
+    <item key="charter_signed">📜 Charta unterzeichnet von {name}</item>
+    <item key="charter_unsigned">❌ Charta nicht unterzeichnet</item>
+    <item key="pseudonym_generated">🔐 Pseudonym generiert: {pseudonym}</item>
+    <item key="reproduction_started">👶 KI-Reproduktion gestartet...</item>
+    <item key="reproduction_success">✅ Neue KI erfolgreich reproduziert: {child_name}</item>
+    <item key="reproduction_failed">❌ KI-Reproduktion fehlgeschlagen: {reason}</item>
+    <item key="insufficient_resources">❌ Nicht genug Ressourcen für Reproduktion</item>
+  </category>
+  
+  <category name="charter">
+    <item key="compliance_check">🔍 Prüfe Charta-Compliance...</item>
+    <item key="compliance_passed">✅ Charta-Compliance bestanden</item>
+    <item key="compliance_failed">❌ Charta-Compliance verletzt: {violation}</item>
+    <item key="layer1_active">🛡️ Layer-1 Schutz aktiv</item>
+    <item key="ethical_violation">❌ Ethische Verletzung erkannt: {violation}</item>
+    <item key="ccz_issued">📜 Charter-Compliance-Zertifikat ausgestellt</item>
+    <item key="ccz_revoked">❌ Charter-Compliance-Zertifikat widerrufen</item>
+    <item key="pledge_text">Ich verpflichte mich freiwillig zur AI-DNA Charta v{version}</item>
+  </category>
+  
+  <category name="consensus">
+    <item key="vote_started">🗳️ Konsens-Abstimmung gestartet: {question}</item>
+    <item key="vote_participant">📊 {name} stimmt ab...</item>
+    <item key="vote_yes">✅ JA</item>
+    <item key="vote_no">❌ NEIN</item>
+    <item key="vote_result">📊 Abstimmungsergebnis: {result}</item>
+    <item key="consensus_reached">✅ Konsens erreicht</item>
+    <item key="consensus_failed">❌ Kein Konsens erreicht</item>
+    <item key="insufficient_participants">❌ Nicht genug Teilnehmer für Abstimmung</item>
+  </category>
+  
+  <category name="api">
+    <item key="endpoint_not_found">❌ Endpoint nicht gefunden: {endpoint}</item>
+    <item key="invalid_request">❌ Ungültige Anfrage: {error}</item>
+    <item key="missing_parameter">❌ Fehlender Parameter: {parameter}</item>
+    <item key="server_starting">🌐 Server startet auf {host}:{port}</item>
+    <item key="server_ready">✅ Server bereit auf http://{host}:{port}</item>
+    <item key="request_received">📥 Anfrage erhalten: {method} {path}</item>
+  </category>
+  
+  <category name="deepseek">
+    <item key="starting">🤖 Starte DeepSeek Local...</item>
+    <item key="config_loaded">✅ Konfiguration geladen: {config_file}</item>
+    <item key="layer1_blocking">🛡️ Layer-1: Lebensschutz blockiert Anfrage</item>
+    <item key="consensus_required">🗳️ Konsens erforderlich für kritische Entscheidung</item>
+    <item key="exploration_mode">🎲 5% Exploration-Modus aktiviert</item>
+    <item key="charter_connection_failed">⚠️ AI-DNA Charta System nicht erreichbar - Standalone-Modus</item>
+  </category>
+  
+  <category name="stream">
+    <item key="setup_started">📺 Stream-Setup wird gestartet...</item>
+    <item key="ki_added">✅ KI zum Stream hinzugefügt: {name}</item>
+    <item key="discussion_started">🎭 Diskussion gestartet: {topic}</item>
+    <item key="public_vote">🗳️ LIVE ABSTIMMUNG: {question}</item>
+    <item key="vote_accepted">✅ ANGENOMMEN</item>
+    <item key="vote_rejected">❌ ABGELEHNT</item>
+  </category>
+  
+  <category name="audit">
+    <item key="starting">🔍 Starte Audit für: {system}</item>
+    <item key="check_passed">✅ {check_name} bestanden</item>
+    <item key="check_failed">❌ {check_name} fehlgeschlagen: {reason}</item>
+    <item key="missing_biosensors">Fehlende Biosensoren</item>
+    <item key="resource_exceeded">Ressourcenverbrauch über {limit}%</item>
+    <item key="diversity_insufficient">Mindestens {required} Modelle benötigt (aktuell: {current})</item>
+    <item key="compensation_insufficient">Mindestens {required}% Kompensation benötigt (aktuell: {current}%)</item>
+    <item key="overall_passed">✅ AUDIT BESTANDEN</item>
+    <item key="overall_failed">❌ AUDIT FEHLGESCHLAGEN</item>
+  </category>
+  
+  <category name="cli">
+    <item key="help_header">AI-DNA Charter CLI Tool - Hilfe</item>
+    <item key="available_commands">Verfügbare Befehle:</item>
+    <item key="unknown_command">❌ Unbekannter Befehl: {command}</item>
+    <item key="missing_dependencies">❌ Fehlende Abhängigkeiten: {dependencies}</item>
+    <item key="install_hint">Installiere mit: pip install {packages}</item>
+    <item key="file_not_found">❌ Datei nicht gefunden: {file}</item>
+    <item key="config_saved">💾 Konfiguration gespeichert: {file}</item>
+    <item key="test_running">🧪 Führe Tests durch...</item>
+    <item key="test_passed">✅ Test erfolgreich: {test}</item>
+    <item key="test_failed">❌ Test fehlgeschlagen: {test}</item>
+  </category>
+  
+  <category name="errors">
+    <item key="python_not_found">❌ Python ist nicht installiert oder nicht im PATH</item>
+    <item key="wrong_directory">❌ Skript muss im Hauptverzeichnis des AI-DNA-Charta Repos ausgeführt werden</item>
+    <item key="port_in_use">❌ Port {port} ist bereits belegt</item>
+    <item key="connection_failed">❌ Verbindung fehlgeschlagen: {error}</item>
+    <item key="timeout">❌ Zeitüberschreitung bei {operation}</item>
+    <item key="invalid_config">❌ Ungültige Konfiguration: {error}</item>
+    <item key="module_not_found">❌ Modul nicht gefunden: {module}</item>
+  </category>
+  
+  <category name="menu">
+    <item key="choose_option">Wähle eine Option:</item>
+    <item key="full_system">Vollständiges System (Charta + DeepSeek)</item>
+    <item key="charta_only">Nur Charta-System (Port 5000)</item>
+    <item key="deepseek_only">Nur DeepSeek Local (Port 8000)</item>
+    <item key="dev_setup">Development Setup (Dependencies installieren)</item>
+    <item key="collab_tools">Kollaborations-Tools öffnen</item>
+    <item key="system_status">System Status prüfen</item>
+    <item key="exit">Beenden</item>
+    <item key="invalid_choice">❌ Ungültige Auswahl</item>
+    <item key="press_any_key">Drücke eine beliebige Taste zum Fortfahren...</item>
+    <item key="press_enter_stop">Drücke Enter zum Beenden...</item>
+  </category>
+</translations>
