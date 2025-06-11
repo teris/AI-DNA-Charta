@@ -1,0 +1,24 @@
+# AI-DNA Charter System - Main Requirements
+# Core dependencies
+flask>=2.0.0
+requests>=2.25.0
+pyyaml>=6.0
+psutil>=5.8.0
+
+# Framework requirements
+typing-extensions>=4.0.0
+dataclasses>=0.6; python_version<"3.7"
+
+# DeepSeek Local requirements (optional)
+numpy>=1.24.0
+transformers>=4.30.0
+torch>=2.0.0
+
+# Development tools (optional)
+pytest>=6.0
+black
+flake8
+
+# Documentation (optional)
+sphinx>=4.0
+sphinx-rtd-theme
